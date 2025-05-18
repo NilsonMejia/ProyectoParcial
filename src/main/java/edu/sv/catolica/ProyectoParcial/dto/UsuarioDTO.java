@@ -1,5 +1,7 @@
 package edu.sv.catolica.ProyectoParcial.dto;
 
+import org.springframework.data.jpa.repository.Query;
+
 public class UsuarioDTO {
     private long usuarioID;
     private String nombre;
@@ -46,4 +48,6 @@ public class UsuarioDTO {
     public void setEmail(String email) {
         this.email = email;
     }
+
+
 }

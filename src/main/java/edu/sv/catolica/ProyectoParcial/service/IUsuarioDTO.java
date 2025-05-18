@@ -7,4 +7,7 @@ import java.util.List;
 public interface IUsuarioDTO{
     List<UsuarioDTO> getAllUsuarios();
     UsuarioDTO saveUsuario(UsuarioDTO usuarioDTO);
+
+
+    List<UsuarioDTO> findPriceLess(double cantidad );
 }
