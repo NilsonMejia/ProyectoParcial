@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import edu.sv.catolica.ProyectoParcial.entities.UsuarioEntity;
+import edu.sv.catolica.ProyectoParcial.dto.UsuarioDTO;
 
 import java.util.List;
 
@@ -15,15 +16,15 @@ public interface UsuarioRepository extends JpaRepository<UsuarioEntity, Long> {
     List<UsuarioDTO> findPriceLess(double cantidad);
 
     @Query("""
-    SELECT new com.tu.paquete.dto.UsuarioConPrestamoDto(
-        u.usuarioID, u.nombre, u.apellido, COUNT(p.prestamoID)
+    SELECT new edu.sv.catolica.ProyectoParcial.dto.UsuarioDTO(
+        UsuarioEntity.UsuarioID,UsuarioEntity.Nombre, UsuarioEntity.Apellido, UsuarioEntity.Email 
     )
-    FROM UsuarioEntity u
-    JOIN PrestamoEntity p ON p.usuario = u
-    WHERE p.fechaDevolucion IS NULL
-    GROUP BY u.usuarioID, u.nombre, u.apellido
+    FROM PrestamoEntity p
+    JOIN UsuarioEntity.UsuarioID 
+    GROUP BY UsuarioEntity.UsuarioID, UsuarioEntity.Nombre, UsuarioEntity.Apellido, UsuarioEntity.Email
+    ORDER BY COUNT(PrestamoEntity.PrestamoID) DESC
 """)
-    List<UsuarioConPrestamoDto> obtenerUsuariosConPrestamosNoDevueltos();
+    List<UsuarioDTO> obtenerTop5UsuariosConMasPrestamos(double cantidad);
 
 
 

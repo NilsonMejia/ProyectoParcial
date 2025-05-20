@@ -15,6 +15,8 @@ public class UsuarioDTO {
         this.nombre = nombre;
         this.apellido = apellido;
         this.email = email;
+
+
     }
 
     public long getUsuarioID() {
