@@ -10,13 +10,13 @@ import edu.sv.catolica.ProyectoParcial.service.IAutor;
 import java.util.List;
 
 @RestController
-@RequestMapping("/process")
+@RequestMapping("/Autor")
 public class AutorController {
     @Autowired
     private IAutor autor;
 
     @Transactional(readOnly = true)
-    @GetMapping("/Autor")
+    @GetMapping("/GetAutor")
     public ResponseEntity<?> getAutores() {
         return new ResponseEntity<>(MessageResponse.builder()
                 .message("Proceso realizado con exito")
@@ -25,7 +25,7 @@ public class AutorController {
                 HttpStatus.OK);
     }
     @Transactional
-    @PostMapping("/Autor")
+    @PostMapping("/PostAutor")
     public AutorEntity saveAutores(@RequestBody AutorEntity nuevoautor) {
         return autor.save(nuevoautor);
 
