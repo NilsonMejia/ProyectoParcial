@@ -25,7 +25,6 @@ public class AutorEntity {
     @Column(columnDefinition = "VARCHAR(100)")
     private String Apellido;
 
-    @Column(columnDefinition = "VARCHAR(50)")
-    private String persona;
+
 
 }
