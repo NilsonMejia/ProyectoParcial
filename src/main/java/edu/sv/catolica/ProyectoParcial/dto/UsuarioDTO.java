@@ -12,5 +12,6 @@ public class UsuarioDTO {
     private String Nombre;
     private String Apellido;
     private String Email;
+    private Boolean Estado;
 
 }

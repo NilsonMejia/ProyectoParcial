@@ -5,13 +5,13 @@ package edu.sv.catolica.ProyectoParcial.service.impl;
 import edu.sv.catolica.ProyectoParcial.dto.UsuarioDTO;
 import edu.sv.catolica.ProyectoParcial.entities.UsuarioEntity;
 import edu.sv.catolica.ProyectoParcial.repository.UsuarioRepository;
-import edu.sv.catolica.ProyectoParcial.service.IUsuarioDTO;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
-
+/*
 @Service
 public class UsuarioDTOImpl implements IUsuarioDTO{
 
@@ -52,5 +52,7 @@ public class UsuarioDTOImpl implements IUsuarioDTO{
         return usuarioRepository.findPriceLess(cantidad);
     }
 
-    */
+
 }
+
+ */

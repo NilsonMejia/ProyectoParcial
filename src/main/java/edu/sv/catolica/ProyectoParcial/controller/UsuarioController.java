@@ -38,9 +38,9 @@ public class UsuarioController {
     }
 
     @Transactional(readOnly = true)
-    @GetMapping("/ConsultaMasPrestamos/{cantidad}")
-    public List<UsuarioDTO>obtenerTop5UsuariosConMasPrestamos(@PathVariable("cantidad") int cantidad){
-        return usuario.obtenerTop5UsuariosConMasPrestamos(cantidad);
+    @GetMapping("/ConsultaInactivos/{cantidad}")
+    public List<UsuarioDTO>obtenerUsuariosInactivos(@PathVariable("cantidad") boolean estado){
+        return usuario.obtenerUsuariosInactivos(estado);
     }
 
 

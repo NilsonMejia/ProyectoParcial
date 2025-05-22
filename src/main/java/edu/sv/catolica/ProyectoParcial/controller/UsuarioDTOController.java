@@ -1,3 +1,4 @@
+/*
 package edu.sv.catolica.ProyectoParcial.controller;
 import edu.sv.catolica.ProyectoParcial.dto.UsuarioDTO;
 import edu.sv.catolica.ProyectoParcial.service.IUsuarioDTO;
@@ -23,3 +24,5 @@ public class UsuarioDTOController {
         return usuarioService.saveUsuario(usuarioDTO);
     }
 }
+
+ */

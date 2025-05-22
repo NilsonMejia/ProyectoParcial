@@ -8,5 +8,5 @@ import java.util.List;
 public interface IUsuario {
     List<UsuarioEntity> findAll();
     UsuarioEntity save(UsuarioEntity usuario);
-    List<UsuarioDTO> obtenerTop5UsuariosConMasPrestamos(double cantidad);
+    List<UsuarioDTO> obtenerUsuariosInactivos(boolean estado);
 }

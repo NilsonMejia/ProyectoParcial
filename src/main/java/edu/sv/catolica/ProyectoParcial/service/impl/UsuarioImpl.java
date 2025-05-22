@@ -28,7 +28,7 @@ public class UsuarioImpl implements IUsuario {
     }
 
     @Override
-    public List<UsuarioDTO>obtenerTop5UsuariosConMasPrestamos(double cantidad ) {
-        return usuarioRepository.obtenerTop5UsuariosConMasPrestamos(cantidad);
+    public List<UsuarioDTO>obtenerUsuariosInactivos(boolean estado ) {
+        return usuarioRepository.obtenerUsuariosInactivos(estado);
     }
 }

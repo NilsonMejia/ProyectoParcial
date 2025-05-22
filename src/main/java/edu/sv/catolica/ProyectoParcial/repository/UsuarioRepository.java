@@ -12,21 +12,18 @@ import java.util.List;
 @Repository
 public interface UsuarioRepository extends JpaRepository<UsuarioEntity, Long> {
 
-    
-
     @Query("""
     SELECT new edu.sv.catolica.ProyectoParcial.dto.UsuarioDTO(
-       p.UsuarioID.UsuarioID,
-       p.UsuarioID.Nombre,
-       p.UsuarioID.Apellido,
-       p.UsuarioID.Email
-       )
-       FROM PrestamoEntity p
-       GROUP BY p.UsuarioID.UsuarioID, p.UsuarioID.Nombre,p.UsuarioID.Apellido,p.UsuarioID.Email
-       ORDER BY COUNT(p.PrestamoID) DESC
+        u.UsuarioID,
+        u.Nombre,
+        u.Apellido,
+        u.Email,
+        u.Estado
+    )
+    FROM UsuarioEntity u
+    WHERE u.Estado = :estado
 """)
-    List<UsuarioDTO> obtenerTop5UsuariosConMasPrestamos(double cantidad);
-
+    List<UsuarioDTO> obtenerUsuariosInactivos(boolean estado);
 
 
 
