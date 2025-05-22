@@ -1,5 +1,6 @@
 package edu.sv.catolica.ProyectoParcial.service.impl;
 
+import edu.sv.catolica.ProyectoParcial.dto.MultaDTO;
 import edu.sv.catolica.ProyectoParcial.entities.MultaEntity;
 import edu.sv.catolica.ProyectoParcial.repository.MultaRepository;
 import edu.sv.catolica.ProyectoParcial.service.IMulta;
@@ -8,6 +9,8 @@ import org.springframework.stereotype.Service;
 import edu.sv.catolica.ProyectoParcial.entities.LibroEntity;
 import edu.sv.catolica.ProyectoParcial.service.ILibro;
 import edu.sv.catolica.ProyectoParcial.repository.LibroRepository;
+
+import java.math.BigDecimal;
 import java.util.List;
 
 @Service
@@ -26,4 +29,10 @@ public class MultaImpl implements IMulta {
     public MultaEntity save(MultaEntity multa) {
         return multaRepository.save(multa);
     }
+
+    @Override
+    public List<MultaDTO> findMultasMenoresA(int cantidad ) {
+        return multaRepository.findMultasMenoresA(cantidad);
+    }
+
 }

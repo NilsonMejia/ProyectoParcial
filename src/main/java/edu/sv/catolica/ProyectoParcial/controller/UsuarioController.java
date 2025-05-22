@@ -1,5 +1,6 @@
 package edu.sv.catolica.ProyectoParcial.controller;
 
+import edu.sv.catolica.ProyectoParcial.dto.MultaDTO;
 import edu.sv.catolica.ProyectoParcial.entities.UsuarioEntity;
 import edu.sv.catolica.ProyectoParcial.payload.MessageResponse;
 import edu.sv.catolica.ProyectoParcial.service.IUsuario;
@@ -8,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
+import edu.sv.catolica.ProyectoParcial.dto.UsuarioDTO;
 import edu.sv.catolica.ProyectoParcial.entities.UsuarioEntity;
 import edu.sv.catolica.ProyectoParcial.service.IUsuario;
 import java.util.List;
@@ -34,6 +36,14 @@ public class UsuarioController {
         return usuario.save(nuevousuario);
 
     }
+
+    @Transactional(readOnly = true)
+    @GetMapping("/ConsultaMasPrestamos/{cantidad}")
+    public List<UsuarioDTO>obtenerTop5UsuariosConMasPrestamos(@PathVariable("cantidad") int cantidad){
+        return usuario.obtenerTop5UsuariosConMasPrestamos(cantidad);
+    }
+
+
 }
 
 

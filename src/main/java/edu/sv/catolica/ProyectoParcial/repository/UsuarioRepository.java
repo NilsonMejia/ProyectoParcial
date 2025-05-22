@@ -12,19 +12,22 @@ import java.util.List;
 @Repository
 public interface UsuarioRepository extends JpaRepository<UsuarioEntity, Long> {
 
-
-    List<UsuarioDTO> findPriceLess(double cantidad);
+    
 
     @Query("""
     SELECT new edu.sv.catolica.ProyectoParcial.dto.UsuarioDTO(
-        UsuarioEntity.UsuarioID,UsuarioEntity.Nombre, UsuarioEntity.Apellido, UsuarioEntity.Email 
-    )
-    FROM PrestamoEntity p
-    JOIN UsuarioEntity.UsuarioID 
-    GROUP BY UsuarioEntity.UsuarioID, UsuarioEntity.Nombre, UsuarioEntity.Apellido, UsuarioEntity.Email
-    ORDER BY COUNT(PrestamoEntity.PrestamoID) DESC
+       p.UsuarioID.UsuarioID,
+       p.UsuarioID.Nombre,
+       p.UsuarioID.Apellido,
+       p.UsuarioID.Email
+       )
+       FROM PrestamoEntity p
+       GROUP BY p.UsuarioID.UsuarioID, p.UsuarioID.Nombre,p.UsuarioID.Apellido,p.UsuarioID.Email
+       ORDER BY COUNT(p.PrestamoID) DESC
 """)
     List<UsuarioDTO> obtenerTop5UsuariosConMasPrestamos(double cantidad);
+
+
 
 
 

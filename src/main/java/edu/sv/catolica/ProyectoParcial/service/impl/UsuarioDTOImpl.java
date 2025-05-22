@@ -46,9 +46,11 @@ public class UsuarioDTOImpl implements IUsuarioDTO{
         UsuarioEntity saved = usuarioRepository.save(convertToEntity(usuarioDTO));
         return convertToDTO(saved);
     }
-    @Override
+   /* @Override
     public List<UsuarioDTO> findPriceLess(double cantidad )
     {
         return usuarioRepository.findPriceLess(cantidad);
     }
+
+    */
 }

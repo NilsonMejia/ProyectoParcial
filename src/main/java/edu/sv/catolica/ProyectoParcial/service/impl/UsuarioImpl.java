@@ -1,6 +1,8 @@
 package edu.sv.catolica.ProyectoParcial.service.impl;
 
 
+import edu.sv.catolica.ProyectoParcial.dto.MultaDTO;
+import edu.sv.catolica.ProyectoParcial.dto.UsuarioDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import edu.sv.catolica.ProyectoParcial.entities.UsuarioEntity;
@@ -23,5 +25,10 @@ public class UsuarioImpl implements IUsuario {
     @Override
     public UsuarioEntity save(UsuarioEntity usuario) {
         return usuarioRepository.save(usuario);
+    }
+
+    @Override
+    public List<UsuarioDTO>obtenerTop5UsuariosConMasPrestamos(double cantidad ) {
+        return usuarioRepository.obtenerTop5UsuariosConMasPrestamos(cantidad);
     }
 }

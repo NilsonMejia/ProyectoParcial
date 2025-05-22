@@ -9,6 +9,9 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import edu.sv.catolica.ProyectoParcial.entities.LibroEntity;
 import edu.sv.catolica.ProyectoParcial.service.ILibro;
+import edu.sv.catolica.ProyectoParcial.dto.MultaDTO;
+
+import java.math.BigDecimal;
 import java.util.List;
 
 @RestController
@@ -34,5 +37,13 @@ public class MultaController {
         return multa.save(nuevaMulta);
 
     }
+
+    @Transactional(readOnly = true)
+    @GetMapping("/ConsultaMonto/{cantidad}")
+    public List<MultaDTO> findMultasMenoresA(@PathVariable("cantidad") int cantidad){
+        return multa.findMultasMenoresA(cantidad);
+    }
+
+
 
 }

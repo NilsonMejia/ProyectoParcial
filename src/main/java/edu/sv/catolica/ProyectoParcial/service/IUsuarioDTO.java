@@ -9,5 +9,5 @@ public interface IUsuarioDTO{
     UsuarioDTO saveUsuario(UsuarioDTO usuarioDTO);
 
 
-    List<UsuarioDTO> findPriceLess(double cantidad );
+
 }
