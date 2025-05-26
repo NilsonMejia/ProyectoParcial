@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import edu.sv.catolica.ProyectoParcial.service.IPrestamo;
 import edu.sv.catolica.ProyectoParcial.repository.PrestamoRepository;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -29,8 +30,8 @@ public class PrestamoImpl implements IPrestamo {
 
 
     @Override
-    public List<PrestamoDTO>obtenerTop5UsuariosConMasPrestamos(double cantidad ) {
-        return prestamoRepository.obtenerTop5UsuariosConMasPrestamos(cantidad);
+    public List<PrestamoDTO>obtenerPrestamosPorFecha(LocalDate fecha ) {
+        return prestamoRepository.obtenerPrestamosPorFecha(fecha);
     }
 
 

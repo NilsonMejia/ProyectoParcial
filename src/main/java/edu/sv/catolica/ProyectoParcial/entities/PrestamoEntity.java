@@ -30,7 +30,7 @@ public class PrestamoEntity {
     private UsuarioEntity UsuarioID;
 
     @Column(columnDefinition = "DATE NOT NULL", name = "Fecha_Prestamo")
-    private LocalDate FechaPestamo;
+    private LocalDate FechaPrestamo;
 
     @Column(columnDefinition = "DATE", name = "Fecha_Devolucion")
     private LocalDate FechaDevolucion;

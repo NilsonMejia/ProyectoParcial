@@ -3,17 +3,19 @@ package edu.sv.catolica.ProyectoParcial.dto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import edu.sv.catolica.ProyectoParcial.entities.UsuarioEntity;
+import edu.sv.catolica.ProyectoParcial.entities.PrestamoEntity;
+
+import java.time.LocalDate;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class PrestamoDTO {
 
-        private long UsuarioID;
-        private String Nombre;
-        private String Apellido;
-        private String Email;
+        private Long prestamoID;
+        private String tituloLibro;
+        private String nombreUsuario;
+        private LocalDate fechaPrestamo;
 
-
-
-
-}
+    }

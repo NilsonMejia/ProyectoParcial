@@ -1,5 +1,6 @@
 package edu.sv.catolica.ProyectoParcial.controller;
 
+import edu.sv.catolica.ProyectoParcial.entities.AutorEntity;
 import edu.sv.catolica.ProyectoParcial.entities.BibliotecaEntity;
 import edu.sv.catolica.ProyectoParcial.payload.MessageResponse;
 import edu.sv.catolica.ProyectoParcial.service.IBiblioteca;
@@ -27,13 +28,14 @@ public class BibliotecaController {
                 HttpStatus.OK);
     }
 
-
-
-
     @Transactional
     @PostMapping("/PostBiblioteca")
-    public BibliotecaEntity saveBiblioteca(@RequestBody BibliotecaEntity nuevaBiblioteca) {
-        return biblioteca.save(nuevaBiblioteca);
+    public ResponseEntity<?> saveBiblioteca(@RequestBody BibliotecaEntity nuevaBiblioteca) {
+        return new ResponseEntity<>(MessageResponse.builder()
+                .message("Proceso realizado con exito")
+                .data(biblioteca.save(nuevaBiblioteca))
+                .build(),
+                HttpStatus.OK);
 
     }
 

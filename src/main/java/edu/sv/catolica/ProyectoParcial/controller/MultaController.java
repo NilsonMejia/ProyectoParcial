@@ -1,4 +1,5 @@
 package edu.sv.catolica.ProyectoParcial.controller;
+import edu.sv.catolica.ProyectoParcial.entities.AutorEntity;
 import edu.sv.catolica.ProyectoParcial.entities.MultaEntity;
 import edu.sv.catolica.ProyectoParcial.payload.MessageResponse;
 import edu.sv.catolica.ProyectoParcial.service.IMulta;
@@ -33,8 +34,12 @@ public class MultaController {
 
     @Transactional
     @PostMapping("/PostMulta")
-    public MultaEntity saveMultas(@RequestBody MultaEntity nuevaMulta) {
-        return multa.save(nuevaMulta);
+    public ResponseEntity<?> saveMultas(@RequestBody MultaEntity nuevaMulta) {
+        return new ResponseEntity<>(MessageResponse.builder()
+                .message("Proceso realizado con exito")
+                .data(multa.save(nuevaMulta))
+                .build(),
+                HttpStatus.OK);
 
     }
 

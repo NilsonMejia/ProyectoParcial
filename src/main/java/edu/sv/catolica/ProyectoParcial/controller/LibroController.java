@@ -1,4 +1,5 @@
 package edu.sv.catolica.ProyectoParcial.controller;
+import edu.sv.catolica.ProyectoParcial.entities.AutorEntity;
 import edu.sv.catolica.ProyectoParcial.payload.MessageResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -26,8 +27,12 @@ public class LibroController {
     }
     @Transactional
     @PostMapping("/PostLibro")
-    public LibroEntity saveLibros(@RequestBody LibroEntity nuevolibro) {
-        return libro.save(nuevolibro);
+    public ResponseEntity<?> saveLibros(@RequestBody LibroEntity nuevolibro) {
+        return new ResponseEntity<>(MessageResponse.builder()
+                .message("Proceso realizado con exito")
+                .data(libro.save(nuevolibro))
+                .build(),
+                 HttpStatus.OK);
 
     }
 

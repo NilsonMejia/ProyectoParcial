@@ -1,6 +1,7 @@
 package edu.sv.catolica.ProyectoParcial.controller;
 
 import edu.sv.catolica.ProyectoParcial.dto.MultaDTO;
+import edu.sv.catolica.ProyectoParcial.entities.AutorEntity;
 import edu.sv.catolica.ProyectoParcial.entities.UsuarioEntity;
 import edu.sv.catolica.ProyectoParcial.payload.MessageResponse;
 import edu.sv.catolica.ProyectoParcial.service.IUsuario;
@@ -32,8 +33,12 @@ public class UsuarioController {
 
     @Transactional
     @PostMapping("/PostUsuario")
-    public UsuarioEntity saveUsuarios(@RequestBody UsuarioEntity nuevousuario) {
-        return usuario.save(nuevousuario);
+    public ResponseEntity<?> saveUsuarios(@RequestBody UsuarioEntity nuevousuario) {
+        return new ResponseEntity<>(MessageResponse.builder()
+                .message("Proceso realizado con exito ")
+                .data(usuario.save(nuevousuario))
+                .build(),
+                HttpStatus.OK);
 
     }
 

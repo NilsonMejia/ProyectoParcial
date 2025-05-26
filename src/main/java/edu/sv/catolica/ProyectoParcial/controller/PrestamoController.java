@@ -2,6 +2,7 @@ package edu.sv.catolica.ProyectoParcial.controller;
 
 import edu.sv.catolica.ProyectoParcial.dto.PrestamoDTO;
 import edu.sv.catolica.ProyectoParcial.dto.UsuarioDTO;
+import edu.sv.catolica.ProyectoParcial.entities.AutorEntity;
 import edu.sv.catolica.ProyectoParcial.entities.PrestamoEntity;
 import edu.sv.catolica.ProyectoParcial.payload.MessageResponse;
 import edu.sv.catolica.ProyectoParcial.service.IPrestamo;
@@ -12,6 +13,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import edu.sv.catolica.ProyectoParcial.entities.PrestamoEntity;
 import edu.sv.catolica.ProyectoParcial.service.IPrestamo;
+
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -32,15 +35,20 @@ public class PrestamoController {
 
     @Transactional
     @PostMapping("/PostPrestamo")
-    public PrestamoEntity savePrestamos(@RequestBody PrestamoEntity nuevoprestamo) {
-        return prestamo.save(nuevoprestamo);
+    public ResponseEntity<?> savePrestamos(@RequestBody PrestamoEntity nuevoprestamo) {
+        return new ResponseEntity<>(MessageResponse.builder()
+                .message("Proceso realizado con exito")
+                .data(prestamo.save(nuevoprestamo))
+                .build(),
+                HttpStatus.OK);
 
     }
 
+
     @Transactional(readOnly = true)
-    @GetMapping("/ConsultaPrestamos/{cantidad}")
-    public List<PrestamoDTO>obtenerTop5UsuariosConMasPrestamos(@PathVariable("cantidad") double cantidad){
-        return prestamo.obtenerTop5UsuariosConMasPrestamos(cantidad);
+    @GetMapping("/ConsultaPrestamos/{fecha}")
+    public List<PrestamoDTO>obtenerPrestamosPorFecha(@PathVariable("fecha") LocalDate fecha){
+        return prestamo.obtenerPrestamosPorFecha(fecha);
     }
 
 
