@@ -44,6 +44,11 @@ public class AutorController {
 
     }
 
+    @Transactional(readOnly = true)
+    @GetMapping("/AutorPorId/{id}")
+    public String Autor(@PathVariable("id") Long id) {
+        return autor.NombrePorId(id);
+    }
 
 
 }
