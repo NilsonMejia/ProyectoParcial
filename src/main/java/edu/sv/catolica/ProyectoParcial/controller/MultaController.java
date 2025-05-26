@@ -13,6 +13,7 @@ import edu.sv.catolica.ProyectoParcial.service.ILibro;
 import edu.sv.catolica.ProyectoParcial.dto.MultaDTO;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -42,12 +43,27 @@ public class MultaController {
                 HttpStatus.OK);
 
     }
-
+/*
     @Transactional(readOnly = true)
     @GetMapping("/ConsultaMonto/{cantidad}")
     public List<MultaDTO> findMultasMenoresA(@PathVariable("cantidad") int cantidad){
         return multa.findMultasMenoresA(cantidad);
     }
+
+ */
+
+    @Transactional(readOnly = true)
+    @GetMapping("/ConsultaMonto/{cantidad}")
+    public ResponseEntity<?>findMultasMenoresA(@PathVariable("cantidad") int cantidad){
+        return new ResponseEntity<>(MessageResponse.builder()
+                .message("Proceso realizado con exito")
+                .data(multa.findMultasMenoresA(cantidad)).
+                build(),
+                HttpStatus.OK);
+    }
+
+
+
 
 
 
