@@ -24,15 +24,6 @@ public class AutorController {
                 .build(),
                 HttpStatus.OK);
     }
-/*
-    @Transactional
-    @PostMapping("/PostAutor")
-    public AutorEntity saveAutores(@RequestBody AutorEntity nuevoautor) {
-        return autor.save(nuevoautor);
-
-    }
-
- */
     @Transactional
     @PostMapping("/PostAutor")
     public ResponseEntity<?> saveAutores(@RequestBody AutorEntity nuevoautor) {
