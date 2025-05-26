@@ -32,4 +32,5 @@ public class AutorImpl implements IAutor {
                 .map(AutorEntity::getNombre)
                 .orElseThrow(() -> new RuntimeException("No se encontro el autor con el id: " + id));
     }
+
 }

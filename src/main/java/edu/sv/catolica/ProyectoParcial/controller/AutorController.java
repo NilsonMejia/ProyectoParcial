@@ -49,6 +49,4 @@ public class AutorController {
     public String Autor(@PathVariable("id") Long id) {
         return autor.NombrePorId(id);
     }
-
-
 }
