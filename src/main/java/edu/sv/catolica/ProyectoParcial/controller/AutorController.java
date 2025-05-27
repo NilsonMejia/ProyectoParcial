@@ -1,4 +1,5 @@
 package edu.sv.catolica.ProyectoParcial.controller;
+import edu.sv.catolica.ProyectoParcial.dto.AutorDTO;
 import edu.sv.catolica.ProyectoParcial.payload.MessageResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -7,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import edu.sv.catolica.ProyectoParcial.entities.AutorEntity;
 import edu.sv.catolica.ProyectoParcial.service.IAutor;
+import org.springframework.http.MediaType;
 import java.util.List;
 
 @RestController
@@ -36,8 +38,8 @@ public class AutorController {
     }
 
     @Transactional(readOnly = true)
-    @GetMapping("/AutorPorId/{id}")
-    public String Autor(@PathVariable("id") Long id) {
-        return autor.NombrePorId(id);
+    @GetMapping(value = "/AutorPorId/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public AutorDTO obtenerAutor(@PathVariable("id") Long id) {
+        return autor.AutorPorId(id);
     }
 }
