@@ -6,4 +6,6 @@ import java.util.List;
 public interface ILibro {
     List<LibroEntity> findAll();
     LibroEntity save(LibroEntity libro);
+
+    List<LibroEntity> buscarPorTitulo(String Titulo);
 }
