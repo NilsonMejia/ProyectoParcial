@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -38,5 +39,19 @@ public class BibliotecaController {
                 HttpStatus.OK);
 
     }
+
+
+    @Transactional(readOnly = true)
+    @GetMapping("/ConsultaFecha/{Fecha}")
+    public ResponseEntity<?> findFechaDevolucion(@PathVariable("Fecha") LocalDate fechaDevolucion)
+        {
+        return new ResponseEntity<>(MessageResponse.builder()
+                .message("Fecha de devolucion")
+                .data(biblioteca.findFechaDevolucion(fechaDevolucion))
+                .build(),
+                HttpStatus.OK);
+    }
+
+
 
 }
