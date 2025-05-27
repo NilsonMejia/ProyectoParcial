@@ -6,4 +6,6 @@ import java.util.List;
 public interface IAutor {
     List<AutorEntity> findAll();
     AutorEntity save(AutorEntity autor);
+    String NombrePorId(Long id);
+
 }

@@ -41,11 +41,23 @@ public class UsuarioController {
                 HttpStatus.OK);
 
     }
-
+/*
     @Transactional(readOnly = true)
     @GetMapping("/ConsultaInactivos/{cantidad}")
     public List<UsuarioDTO>obtenerUsuariosInactivos(@PathVariable("cantidad") boolean estado){
         return usuario.obtenerUsuariosInactivos(estado);
+    }
+
+ */
+
+    @Transactional(readOnly = true)
+    @GetMapping("/ConsultaInactivos/{cantidad}")
+    public ResponseEntity<?>obtenerUsuariosInactivos(@PathVariable("cantidad") boolean estado){
+        return new ResponseEntity<>(MessageResponse.builder()
+                .message("Proceso realizado con exito")
+                .data(usuario.obtenerUsuariosInactivos(estado))
+                .build(),
+                HttpStatus.OK);
     }
 
 
