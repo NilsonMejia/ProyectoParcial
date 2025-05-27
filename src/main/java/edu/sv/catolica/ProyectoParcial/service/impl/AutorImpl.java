@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import edu.sv.catolica.ProyectoParcial.entities.AutorEntity;
 import edu.sv.catolica.ProyectoParcial.service.IAutor;
 import edu.sv.catolica.ProyectoParcial.repository.AutorRepository;
+import edu.sv.catolica.ProyectoParcial.dto.AutorDTO; // <-- Este import falta
 
 import java.util.List;
 
@@ -27,10 +28,10 @@ public class AutorImpl implements IAutor {
     }
 
     @Override
-    public String NombrePorId(Long id){
-        return autorRepository.findById(id)
-                .map(AutorEntity::getNombre)
-                .orElseThrow(() -> new RuntimeException("No se encontro el autor con el id: " + id));
+    public AutorDTO AutorPorId(Long id) {
+        return autorRepository.AutorPorId(id)
+                .orElseThrow(() -> new RuntimeException("Autor no encontrado"));
     }
+
 
 }
