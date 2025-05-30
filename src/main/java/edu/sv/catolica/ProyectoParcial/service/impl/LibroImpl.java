@@ -23,4 +23,9 @@ public class LibroImpl implements ILibro {
     public LibroEntity save(LibroEntity libro) {
         return libroRepository.save(libro);
     }
+
+    @Override
+    public List<LibroEntity> buscarPorTitulo(String Titulo) {
+        return libroRepository.buscarPorTitulo(Titulo);
+    }
 }

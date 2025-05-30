@@ -17,7 +17,7 @@ public class AutorEntity {
     @Id
     @Column(columnDefinition = "INT", name = "Autor_ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long AutorID;
+    private Long AutorID;
 
     @Column(columnDefinition = "VARCHAR(100)")
     private String Nombre;

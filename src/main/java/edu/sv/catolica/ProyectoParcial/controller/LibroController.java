@@ -35,5 +35,14 @@ public class LibroController {
                  HttpStatus.OK);
 
     }
+    @Transactional(readOnly = true)
+    @GetMapping("/BuscarLibro/{Titulo}")
+    public ResponseEntity<?> buscarLibroPorTitulo(@PathVariable String Titulo) {
+        return new ResponseEntity<>(MessageResponse.builder()
+                .message("Libros encontrados")
+                .data(libro.buscarPorTitulo(Titulo))
+                .build(),
+                HttpStatus.OK);
+    }
 
 }
