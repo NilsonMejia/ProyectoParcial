@@ -8,7 +8,10 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import edu.sv.catolica.ProyectoParcial.entities.LibroEntity;
 import edu.sv.catolica.ProyectoParcial.service.ILibro;
+
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/Libro")
@@ -44,5 +47,29 @@ public class LibroController {
                 .build(),
                 HttpStatus.OK);
     }
+
+    @DeleteMapping("/{LibroID}")
+    public ResponseEntity<?> eliminarLibro(@PathVariable long LibroID) {
+        try {
+            ILibro.eliminarLibro(LibroID);
+            return ResponseEntity.ok(Map.of(
+                    "mensaje", "Libro eliminado exitosamente",
+                    "timestamp", LocalDateTime.now()
+            ));
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body(Map.of(
+                            "error", e.getMessage(),
+                            "timestamp", LocalDateTime.now()
+                    ));
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError()
+                    .body(Map.of(
+                            "error", "Error al procesar la solicitud",
+                            "timestamp", LocalDateTime.now()
+                    ));
+        }
+    }
+
 
 }

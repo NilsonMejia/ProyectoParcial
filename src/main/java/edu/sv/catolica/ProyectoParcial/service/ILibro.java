@@ -8,4 +8,7 @@ public interface ILibro {
     LibroEntity save(LibroEntity libro);
 
     List<LibroEntity> buscarPorTitulo(String Titulo);
+
+    static void eliminarLibro(long LibroID){
+    }
 }
