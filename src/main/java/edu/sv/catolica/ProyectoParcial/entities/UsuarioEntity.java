@@ -36,7 +36,4 @@ public class UsuarioEntity {
     private Boolean Estado;
 
 
-
-
-
 }

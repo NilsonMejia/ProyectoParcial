@@ -31,4 +31,9 @@ public class UsuarioImpl implements IUsuario {
     public List<UsuarioDTO>obtenerUsuariosInactivos(boolean estado ) {
         return usuarioRepository.obtenerUsuariosInactivos(estado);
     }
+
+    public void eliminarUsuario(Long id) {
+        usuarioRepository.deleteById(id);
+    }
+
 }
