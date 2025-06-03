@@ -42,4 +42,13 @@ public class AutorController {
     public AutorDTO obtenerAutor(@PathVariable("id") Long id) {
         return autor.AutorPorId(id);
     }
+
+    @Transactional
+    @DeleteMapping("/AutorEliminar/{id}")
+    public ResponseEntity<?> deleteAutor(@PathVariable Long id) {
+        autor.delete(id);
+        return new ResponseEntity<>(MessageResponse.builder()
+                .message("Autor eliminado con éxito.")
+                .build(), HttpStatus.OK);
+    }
 }

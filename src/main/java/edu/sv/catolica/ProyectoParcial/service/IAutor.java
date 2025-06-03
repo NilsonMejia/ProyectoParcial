@@ -8,5 +8,5 @@ public interface IAutor {
     List<AutorEntity> findAll();
     AutorEntity save(AutorEntity autor);
     AutorDTO AutorPorId(Long id);
-
+    void delete(Long id);
 }
