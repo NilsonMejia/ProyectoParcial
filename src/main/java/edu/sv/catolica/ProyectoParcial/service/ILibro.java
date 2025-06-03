@@ -1,6 +1,8 @@
 package edu.sv.catolica.ProyectoParcial.service;
 
 import edu.sv.catolica.ProyectoParcial.entities.LibroEntity;
+import jakarta.transaction.Transactional;
+
 import java.util.List;
 
 public interface ILibro {
@@ -9,6 +11,8 @@ public interface ILibro {
 
     List<LibroEntity> buscarPorTitulo(String Titulo);
 
-    static void eliminarLibro(long LibroID){
-    }
+
+
+    @Transactional
+    Object eliminarLibro(Long libroID);
 }

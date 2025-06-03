@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import edu.sv.catolica.ProyectoParcial.entities.LibroEntity;
 import org.springframework.transaction.annotation.Transactional;
 
+
 import java.util.List;
 
 @Repository
@@ -18,7 +19,12 @@ public interface LibroRepository extends JpaRepository<LibroEntity, Long> {
     @Transactional
     @Modifying
     @Query("DELETE FROM LibroEntity l WHERE l.LibroID = :LibroID")
-    void eliminarLibro(@Param("LibroID")long LibroID);
+    void delete(@Param("LibroID") long LibroID);
+
+//    @Transactional
+//    @Modifying
+//    @Query("DELETE FROM LibroEntity l WHERE l.LibroID = :LibroID")
+//    void deleteByLibroID(@Param("LibroID")long LibroID);
 
 
 

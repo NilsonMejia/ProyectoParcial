@@ -1,6 +1,7 @@
 package edu.sv.catolica.ProyectoParcial.controller;
 import edu.sv.catolica.ProyectoParcial.entities.AutorEntity;
 import edu.sv.catolica.ProyectoParcial.payload.MessageResponse;
+import edu.sv.catolica.ProyectoParcial.service.impl.LibroImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -48,28 +49,18 @@ public class LibroController {
                 HttpStatus.OK);
     }
 
-    @DeleteMapping("/{LibroID}")
-    public ResponseEntity<?> eliminarLibro(@PathVariable long LibroID) {
-        try {
-            ILibro.eliminarLibro(LibroID);
-            return ResponseEntity.ok(Map.of(
-                    "mensaje", "Libro eliminado exitosamente",
-                    "timestamp", LocalDateTime.now()
-            ));
-        } catch (IllegalArgumentException e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body(Map.of(
-                            "error", e.getMessage(),
-                            "timestamp", LocalDateTime.now()
-                    ));
-        } catch (Exception e) {
-            return ResponseEntity.internalServerError()
-                    .body(Map.of(
-                            "error", "Error al procesar la solicitud",
-                            "timestamp", LocalDateTime.now()
-                    ));
-        }
+//    @DeleteMapping("/delete/{libroID}")
+//    public ResponseEntity<?> eliminarLibro(@PathVariable Long libroID) {
+//        libro.eliminarLibro(libroID);
+//        return ResponseEntity.ok().build();
+//    }
+
+    @DeleteMapping("/delete/{libroID}")
+    public ResponseEntity<?> eliminarLibro(@PathVariable Long libroID) {
+        return new ResponseEntity<>(MessageResponse.builder()
+                .message("Libro Eliminado")
+                .data(libro.eliminarLibro(libroID))
+                .build(),
+                HttpStatus.OK);
     }
-
-
 }
