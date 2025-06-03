@@ -1,6 +1,7 @@
 package edu.sv.catolica.ProyectoParcial.entities;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import edu.sv.catolica.ProyectoParcial.entities.AutorEntity;
 
 import jakarta.persistence.*;
@@ -23,11 +24,14 @@ public class BibliotecaEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long BibliotecaID;
 
+
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "Libro_ID" , nullable = false)
     private LibroEntity libro;
 
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "Prestamo_ID" , nullable = false)
     private PrestamoEntity prestamo;
 
