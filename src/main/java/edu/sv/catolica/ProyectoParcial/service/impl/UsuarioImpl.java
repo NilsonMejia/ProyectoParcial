@@ -46,4 +46,14 @@ public class UsuarioImpl implements IUsuario {
         return usuarioRepository.save(usuario);
     }
 
+
+    @Override
+    public void delete(Long id) {
+        if (!usuarioRepository.existsById(id)) {
+            throw new RuntimeException("Usuario no encontrado con id: " + id);
+        }
+        usuarioRepository.deleteById(id);
+    }
+
+
 }

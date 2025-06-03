@@ -9,4 +9,8 @@ public interface IUsuario {
     List<UsuarioEntity> findAll();
     UsuarioEntity save(UsuarioEntity usuario);
     List<UsuarioDTO> obtenerUsuariosInactivos(boolean estado);
+
+
+    void delete(Long id);
+
 }

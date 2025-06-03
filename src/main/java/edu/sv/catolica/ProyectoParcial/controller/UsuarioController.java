@@ -78,6 +78,16 @@ public class UsuarioController {
     }
 
 
+    @Transactional
+    @DeleteMapping("/Eliminar/{id}")
+    public ResponseEntity<?> eliminarUsuario(@PathVariable Long id) {
+        usuario.delete(id);
+        return new ResponseEntity<>(MessageResponse.builder()
+                .message("Usuario eliminado con éxito.")
+                .build(), HttpStatus.OK);
+    }
+
+
 
 
 }
