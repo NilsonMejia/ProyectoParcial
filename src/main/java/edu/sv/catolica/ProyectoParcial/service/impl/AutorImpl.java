@@ -1,6 +1,5 @@
 package edu.sv.catolica.ProyectoParcial.service.impl;
 
-import jakarta.persistence.Id;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import edu.sv.catolica.ProyectoParcial.entities.AutorEntity;
@@ -34,11 +33,5 @@ public class AutorImpl implements IAutor {
                 .orElseThrow(() -> new RuntimeException("Autor no encontrado"));
     }
 
-    @Override
-    public void delete(Long id) {
-        if (!autorRepository.existsById(id)) {
-            throw new RuntimeException("Autor no encontrado con id: " + id);
-        }
-        autorRepository.deleteById(id);
-    }
+
 }

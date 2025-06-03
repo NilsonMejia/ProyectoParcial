@@ -5,8 +5,8 @@ import edu.sv.catolica.ProyectoParcial.entities.AutorEntity;
 import edu.sv.catolica.ProyectoParcial.entities.UsuarioEntity;
 import edu.sv.catolica.ProyectoParcial.payload.MessageResponse;
 import edu.sv.catolica.ProyectoParcial.service.IUsuario;
-import edu.sv.catolica.ProyectoParcial.service.UsuarioService;
 import edu.sv.catolica.ProyectoParcial.service.impl.UsuarioImpl;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,11 +18,12 @@ import edu.sv.catolica.ProyectoParcial.service.IUsuario;
 import java.util.List;
 
 @RestController
-
 @RequestMapping("/Usuario")
 public class UsuarioController {
     @Autowired
     private IUsuario usuario;
+    @Autowired
+    private UsuarioImpl usuarioImpl;
 
     @Transactional(readOnly = true)
     @GetMapping("/GetUsuario")
@@ -63,14 +64,19 @@ public class UsuarioController {
                 HttpStatus.OK);
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> eliminarUsuario(@PathVariable Long id) {
-        usuarioService.eliminarUsuario(id);
-        return ResponseEntity.noContent().build();
+
+    @PutMapping("/ActualizarUsuario/{id}")
+    public ResponseEntity<?> actualizarUsuario(
+            @PathVariable Long id,
+            @RequestBody UsuarioDTO dto) {
+        try {
+            UsuarioEntity actualizado = usuarioImpl.actualizarUsuario(id, dto);
+            return ResponseEntity.ok(actualizado);
+        } catch (EntityNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
     }
 
-    @Autowired
-    private UsuarioService usuarioService;
 
 
 

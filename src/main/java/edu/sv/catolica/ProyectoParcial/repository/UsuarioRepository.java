@@ -8,6 +8,7 @@ import edu.sv.catolica.ProyectoParcial.entities.UsuarioEntity;
 import edu.sv.catolica.ProyectoParcial.dto.UsuarioDTO;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface UsuarioRepository extends JpaRepository<UsuarioEntity, Long> {
@@ -26,7 +27,5 @@ public interface UsuarioRepository extends JpaRepository<UsuarioEntity, Long> {
     List<UsuarioDTO> obtenerUsuariosInactivos(boolean estado);
 
 
-
-
-
+    //Optional<Object> findByNombre(String nombreUsuario);
 }
