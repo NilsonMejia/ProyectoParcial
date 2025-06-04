@@ -88,7 +88,7 @@ Esta guía describe cómo interactuar con los principales endpoints de la API pa
 | POST   | `/Usuario/PostUsuarios`        | Crear un usuario nuevo              |
 | POST   | `/Prestamo/PostPrestamo`       | Crear un préstamo                   |
 | GET    | `/Prestamo/GetPrestamo`        | Listar todos los préstamos          |
-| PUT    | `/ActualizarPrestamo/{id}`     | Atualizar un prestamo               |
+| PUT    | `/ActualizarPrestamo/{id}`     | Actualizar un prestamo               |
 
 ---
 
