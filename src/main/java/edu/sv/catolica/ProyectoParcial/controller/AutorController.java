@@ -28,20 +28,43 @@ public class AutorController {
     @Transactional(readOnly = true)
     @GetMapping("/GetAutor")
     public ResponseEntity<?> getAutores() {
-        return new ResponseEntity<>(MessageResponse.builder()
-                .message("Proceso realizado con exito")
-                .data(autor.findAll())
-                .build(),
-                HttpStatus.OK);
+        try {
+            return new ResponseEntity<>(
+                    MessageResponse.builder()
+                            .message("Proceso realizado con éxito")
+                            .data(autor.findAll())
+                            .build(),
+                    HttpStatus.OK
+            );
+        } catch (Exception e) {
+            return new ResponseEntity<>(
+                    MessageResponse.builder()
+                            .message("Error al obtener los autores")
+                            .data(e.getMessage())
+                            .build(),
+                    HttpStatus.INTERNAL_SERVER_ERROR
+            );
+        }
     }
+
     @Transactional
     @PostMapping("/PostAutor")
     public ResponseEntity<?> saveAutores(@RequestBody AutorEntity nuevoautor) {
-        return new ResponseEntity<>(MessageResponse.builder()
-                .message("Proceso realizado con exito")
-                .data(autor.save(nuevoautor))
-                .build(),
-                HttpStatus.OK);
+        try {
+            return new ResponseEntity<>(MessageResponse.builder()
+                    .message("Proceso realizado con exito")
+                    .data(autor.save(nuevoautor))
+                    .build(),
+                    HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(
+                    MessageResponse.builder()
+                            .message("Error al obtener los autores")
+                            .data(e.getMessage())
+                            .build(),
+                    HttpStatus.INTERNAL_SERVER_ERROR
+            );
+        }
 
     }
 
