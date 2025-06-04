@@ -77,18 +77,18 @@ Esta guía describe cómo interactuar con los principales endpoints de la API pa
 
 ### 🔌 Endpoints principales
 
-| Método | Ruta                            | Descripción                          |
-|--------|--------------------------------|------------------------------------|
-| GET    | `/api/libros`                  | Obtener todos los libros            |
-| GET    | `/api/libros/{id}`             | Obtener un libro por ID             |
-| POST   | `/api/libros`                  | Crear un libro nuevo                |
-| PUT    | `/api/libros/{id}`             | Actualizar un libro                 |
-| DELETE | `/api/libros/{id}`             | Eliminar un libro                  |
-| GET    | `/api/usuarios`                | Obtener todos los usuarios          |
-| POST   | `/api/usuarios`                | Crear un usuario nuevo              |
-| POST   | `/api/prestamos`               | Crear un préstamo                   |
-| GET    | `/api/prestamos`               | Listar todos los préstamos          |
-| PUT    | `/api/prestamos/{id}/devolver`| Marcar préstamo como devuelto       |
+| Método | Ruta                           | Descripción                         |
+|--------|--------------------------------|-------------------------------------|
+| GET    | `/Libro/GetLibro`              | Obtener todos los libros            |
+| GET    | `/BuscarLibro/{Titulo}`        | Obtener un libro por titulo         |
+| POST   | `/Libro/PostLibro`             | Crear un libro nuevo                |
+| PUT    | `/ActualizarLibro/{id}`        | Actualizar un libro                 |
+| DELETE | `/delete/{libroID}`            | Eliminar un libro                   |
+| GET    | `/Usuario/GetUsuario`          | Obtener todos los usuarios          |
+| POST   | `/Usuario/PostUsuarios`        | Crear un usuario nuevo              |
+| POST   | `/Prestamo/PostPrestamo`       | Crear un préstamo                   |
+| GET    | `/Prestamo/GetPrestamo`        | Listar todos los préstamos          |
+| PUT    | `/ActualizarPrestamo/{id}`     | Atualizar un prestamo               |
 
 ---
 
