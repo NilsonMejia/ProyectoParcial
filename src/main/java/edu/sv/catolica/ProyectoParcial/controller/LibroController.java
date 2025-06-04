@@ -1,7 +1,11 @@
 package edu.sv.catolica.ProyectoParcial.controller;
+import edu.sv.catolica.ProyectoParcial.dto.LibroDTO;
+import edu.sv.catolica.ProyectoParcial.dto.UsuarioDTO;
 import edu.sv.catolica.ProyectoParcial.entities.AutorEntity;
+import edu.sv.catolica.ProyectoParcial.entities.UsuarioEntity;
 import edu.sv.catolica.ProyectoParcial.payload.MessageResponse;
 import edu.sv.catolica.ProyectoParcial.service.impl.LibroImpl;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +23,8 @@ import java.util.Map;
 public class LibroController {
     @Autowired
     private ILibro libro;
+    @Autowired
+    private LibroImpl libroimpl;
 
     @Transactional(readOnly = true)
     @GetMapping("/GetLibro")
@@ -63,4 +69,24 @@ public class LibroController {
                 .build(),
                 HttpStatus.OK);
     }
+
+    @PutMapping("/ActualizarLibro/{id}")
+    public ResponseEntity<?> actualizarLibro(
+            @PathVariable Long id,
+            @RequestBody LibroDTO dto) {
+        try {
+            LibroEntity actualizado = libroimpl.actualizarLibro(id, dto);
+            return ResponseEntity.ok(actualizado);
+        } catch (EntityNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+    }
+//@PutMapping("/ActualizarLibro/{id}")
+//public ResponseEntity<LibroEntity> actualizarLibro(
+//        @PathVariable Long id,
+//        @RequestBody LibroDTO dto) {
+//    LibroEntity actualizado = libroimpl.actualizarLibro(id, dto);
+//    return ResponseEntity.ok(actualizado);
+//}
+
 }
