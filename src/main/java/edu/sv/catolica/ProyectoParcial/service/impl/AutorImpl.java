@@ -37,11 +37,6 @@ public class AutorImpl implements IAutor {
                 .orElseThrow(() -> new RuntimeException("Autor no encontrado"));
     }
 
-    @Override
-    public void delete(Long id) {
-
-    }
-
     @Transactional
     public AutorEntity actualizarAutor(Long id, AutorDTO dto) {
         AutorEntity autor = autorRepository.findById(id)
@@ -52,6 +47,11 @@ public class AutorImpl implements IAutor {
         return autorRepository.save(autor);
     }
 
-
-
+    @Override
+    public void delete(Long id) {
+        if (!autorRepository.existsById(id)) {
+            throw new RuntimeException("Autor no encontrado con id: " + id);
+        }
+        autorRepository.deleteById(id);
+    }
 }

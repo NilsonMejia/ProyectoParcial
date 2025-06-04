@@ -64,4 +64,13 @@ public class AutorController {
         }
     }
 
+    @Transactional
+    @DeleteMapping("/AutorEliminar/{id}")
+    public ResponseEntity<?> deleteAutor(@PathVariable Long id) {
+        autor.delete(id);
+        return new ResponseEntity<>(MessageResponse.builder()
+                .message("Autor eliminado con éxito.")
+                .build(), HttpStatus.OK);
+    }
+
 }
