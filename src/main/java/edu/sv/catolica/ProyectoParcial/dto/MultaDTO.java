@@ -5,12 +5,13 @@ import java.time.LocalDate;
 
 public class MultaDTO {
     private Long multaId;
+    private Long usuarioID;
     private String nombreUsuario;
     private LocalDate fechaGeneracion;
     private BigDecimal monto;
-    private boolean estado;
+    private Boolean estado;
 
-    public MultaDTO(Long multaId, String nombreUsuario, LocalDate fechaGeneracion, BigDecimal monto, boolean estado) {
+    public MultaDTO(Long multaId, String nombreUsuario, LocalDate fechaGeneracion, BigDecimal monto, Boolean estado) {
         this.multaId = multaId;
         this.nombreUsuario = nombreUsuario;
         this.fechaGeneracion = fechaGeneracion;
@@ -18,10 +19,11 @@ public class MultaDTO {
         this.estado = estado;
     }
 
-    // Getters y setters
-
     public Long getMultaId() { return multaId; }
     public void setMultaId(Long multaId) { this.multaId = multaId; }
+
+    public Long getUsuarioID() { return usuarioID; }
+    public void setUsuarioID(Long usuarioID) { this.usuarioID = usuarioID; }
 
     public String getNombreUsuario() { return nombreUsuario; }
     public void setNombreUsuario(String nombreUsuario) { this.nombreUsuario = nombreUsuario; }
@@ -32,7 +34,8 @@ public class MultaDTO {
     public BigDecimal getMonto() { return monto; }
     public void setMonto(BigDecimal monto) { this.monto = monto; }
 
-    public boolean isEstado() { return estado; }
-    public void setEstado(boolean estado) { this.estado = estado; }
+    public Boolean getEstado() { return estado; }
+    public void setEstado(Boolean estado) { this.estado = estado; }
+
 }
 
