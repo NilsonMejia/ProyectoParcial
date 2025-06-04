@@ -59,8 +59,8 @@ public class PrestamoImpl implements IPrestamo {
         prestamo.setFechaPrestamo(dto.getFechaPrestamo());
         prestamo.setFechaDevolucion(dto.getFechaDevolucion());
         prestamo.setLibroID((LibroEntity)
-                libroRepository.findById(dto.getAutorID())
-                        .orElseThrow(() -> new EntityNotFoundException("Autor no encontrado con ID: " + dto.getAutorID())));
+                libroRepository.findById(dto.getLibroID())
+                        .orElseThrow(() -> new EntityNotFoundException("Libro no encontrado con ID: " + dto.getLibroID())));
         prestamo.setDisponible(dto.getDisponible());
         return prestamoRepository.save(prestamo);
     }

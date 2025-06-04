@@ -16,4 +16,5 @@ public class PrestamoDTO2 {
     private LocalDate fechaDevolucion;
     private Boolean Disponible;
     private Long AutorID;
+    private Long LibroID;
 }
