@@ -1,6 +1,7 @@
 package edu.sv.catolica.ProyectoParcial.entities;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import edu.sv.catolica.ProyectoParcial.entities.AutorEntity;
 import edu.sv.catolica.ProyectoParcial.entities.UsuarioEntity;
 import jakarta.persistence.*;
@@ -25,6 +26,7 @@ public class MultaEntity {
 
 
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "Usuario_ID", nullable = false)
     private UsuarioEntity usuario ;
 

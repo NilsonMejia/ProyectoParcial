@@ -6,6 +6,8 @@ import edu.sv.catolica.ProyectoParcial.entities.AutorEntity;
 import edu.sv.catolica.ProyectoParcial.entities.PrestamoEntity;
 import edu.sv.catolica.ProyectoParcial.payload.MessageResponse;
 import edu.sv.catolica.ProyectoParcial.service.IPrestamo;
+import edu.sv.catolica.ProyectoParcial.service.impl.PrestamoImpl;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,6 +24,10 @@ import java.util.List;
 public class PrestamoController {
     @Autowired
     private IPrestamo prestamo;
+
+
+    @Autowired
+    private PrestamoImpl prestamoImpl;
 
     @Transactional(readOnly = true)
     @GetMapping("/GetPrestamo")
@@ -61,6 +67,19 @@ public ResponseEntity<?>obtenerPrestamosPorFecha(@PathVariable("fecha") LocalDat
             .build(),
             HttpStatus.OK);
 }
+
+
+
+//    @PutMapping("/ActualizarPrestamo/{id}")
+//    public ResponseEntity<?> actualizarPrestamo(@PathVariable Long id, @RequestBody PrestamoDTO dto) {
+//        try {
+//            PrestamoEntity actualizado = prestamoImpl.actualizarPrestamo(id, dto);
+//            return ResponseEntity.ok(actualizado);
+//        } catch (EntityNotFoundException e) {
+//            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+//        }
+//    }
+
 
 
 

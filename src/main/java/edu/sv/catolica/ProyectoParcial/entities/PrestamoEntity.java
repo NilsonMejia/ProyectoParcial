@@ -1,5 +1,6 @@
 package edu.sv.catolica.ProyectoParcial.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import edu.sv.catolica.ProyectoParcial.entities.UsuarioEntity;
@@ -7,6 +8,7 @@ import edu.sv.catolica.ProyectoParcial.entities.LibroEntity;
 import java.math.BigDecimal;
 import java.text.DateFormat;
 import java.time.LocalDate;
+import java.util.List;
 
 @Setter
 @Getter
@@ -22,10 +24,12 @@ public class PrestamoEntity {
     private long PrestamoID;
 
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "Libro_ID", nullable = false)
-    private LibroEntity libroID;
+    private LibroEntity LibroID;
 
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "Usuario_ID", nullable = false)
     private UsuarioEntity UsuarioID;
 
@@ -38,5 +42,8 @@ public class PrestamoEntity {
     @Column(columnDefinition = "BOOLEAN", name = "Estado")
     private boolean Disponible;
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "prestamo", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<BibliotecaEntity> bibliotecas;
 
 }

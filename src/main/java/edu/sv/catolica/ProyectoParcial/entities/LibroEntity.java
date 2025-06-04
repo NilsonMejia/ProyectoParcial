@@ -1,5 +1,6 @@
 package edu.sv.catolica.ProyectoParcial.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import edu.sv.catolica.ProyectoParcial.entities.AutorEntity;
 import jakarta.persistence.*;
 import lombok.*;
@@ -8,6 +9,8 @@ import java.math.BigDecimal;
 import java.sql.Date;
 import java.text.DateFormat;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Setter
 @Getter
@@ -26,6 +29,7 @@ public class LibroEntity {
     private String Titulo;
 
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "Autor_ID" , nullable = false)
     private AutorEntity Autor;
 
@@ -38,7 +42,13 @@ public class LibroEntity {
     @Column (columnDefinition = "BOOLEAN", name = "Disponible")
     private Boolean Disponible;
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "libro", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<BibliotecaEntity> bibliotecas = new ArrayList<>();
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "LibroID", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<PrestamoEntity> prestamos = new ArrayList<>();
 
 
 

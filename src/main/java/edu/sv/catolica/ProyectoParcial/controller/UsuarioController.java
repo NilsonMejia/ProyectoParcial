@@ -5,6 +5,8 @@ import edu.sv.catolica.ProyectoParcial.entities.AutorEntity;
 import edu.sv.catolica.ProyectoParcial.entities.UsuarioEntity;
 import edu.sv.catolica.ProyectoParcial.payload.MessageResponse;
 import edu.sv.catolica.ProyectoParcial.service.IUsuario;
+import edu.sv.catolica.ProyectoParcial.service.impl.UsuarioImpl;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +22,8 @@ import java.util.List;
 public class UsuarioController {
     @Autowired
     private IUsuario usuario;
+    @Autowired
+    private UsuarioImpl usuarioImpl;
 
     @Transactional(readOnly = true)
     @GetMapping("/GetUsuario")
@@ -58,6 +62,29 @@ public class UsuarioController {
                 .data(usuario.obtenerUsuariosInactivos(estado))
                 .build(),
                 HttpStatus.OK);
+    }
+
+
+    @PutMapping("/ActualizarUsuario/{id}")
+    public ResponseEntity<?> actualizarUsuario(
+            @PathVariable Long id,
+            @RequestBody UsuarioDTO dto) {
+        try {
+            UsuarioEntity actualizado = usuarioImpl.actualizarUsuario(id, dto);
+            return ResponseEntity.ok(actualizado);
+        } catch (EntityNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+    }
+
+
+    @Transactional
+    @DeleteMapping("/Eliminar/{id}")
+    public ResponseEntity<?> eliminarUsuario(@PathVariable Long id) {
+        usuario.delete(id);
+        return new ResponseEntity<>(MessageResponse.builder()
+                .message("Usuario eliminado con éxito.")
+                .build(), HttpStatus.OK);
     }
 
 
