@@ -55,12 +55,6 @@ public class LibroController {
                 HttpStatus.OK);
     }
 
-//    @DeleteMapping("/delete/{libroID}")
-//    public ResponseEntity<?> eliminarLibro(@PathVariable Long libroID) {
-//        libro.eliminarLibro(libroID);
-//        return ResponseEntity.ok().build();
-//    }
-
     @DeleteMapping("/delete/{libroID}")
     public ResponseEntity<?> eliminarLibro(@PathVariable Long libroID) {
         return new ResponseEntity<>(MessageResponse.builder()
@@ -81,12 +75,5 @@ public class LibroController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
     }
-//@PutMapping("/ActualizarLibro/{id}")
-//public ResponseEntity<LibroEntity> actualizarLibro(
-//        @PathVariable Long id,
-//        @RequestBody LibroDTO dto) {
-//    LibroEntity actualizado = libroimpl.actualizarLibro(id, dto);
-//    return ResponseEntity.ok(actualizado);
-//}
 
 }

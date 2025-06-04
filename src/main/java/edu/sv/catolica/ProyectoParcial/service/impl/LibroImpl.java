@@ -46,9 +46,6 @@ public class LibroImpl implements ILibro {
         return libroRepository.buscarPorTitulo(Titulo);
     }
 
-
-
-
     @Transactional
     public Object eliminarLibro(Long libroId) {
         // 1. Buscar el libro
@@ -80,54 +77,5 @@ public class LibroImpl implements ILibro {
         libro.setDisponible(dto.getDisponible());
         return libroRepository.save(libro);
     }
-
-//    @Transactional
-//    public LibroEntity actualizarLibro(Long id, LibroDTO dto) {
-//        // Buscar el libro existente
-//        LibroEntity libro = libroRepository.findById(id)
-//                .orElseThrow(() -> new EntityNotFoundException("Libro no encontrado con ID: " + id));
-//
-//        // Buscar el autor relacionado
-//        AutorEntity autor = autorRepository.findById(dto.getAutorID())
-//                .orElseThrow(() -> new EntityNotFoundException("Autor no encontrado con ID: " + dto.getAutorID()));
-//
-//        // Actualizar los campos del libro
-//        libro.setLibroID(dto.getLibroID()); // ⚠️ Este campo normalmente no se debe cambiar en una actualización
-//        libro.setTitulo(dto.getTitulo());
-//        libro.setAutor(autor);
-//        libro.setPublicacion(Date.valueOf(dto.getPublicacion()));
-//        libro.setGenero(dto.getGenero());
-//        libro.setDisponible(dto.getDisponible());
-//
-//        // Guardar y devolver el libro actualizado
-//        return libroRepository.save(libro);
-//    }
-
-//    @Transactional
-//    public LibroEntity actualizarLibro(Long id, LibroDTO dto) {
-//        if (id == null) {
-//            throw new IllegalArgumentException("El ID del libro no puede ser null");
-//        }
-//        if (dto.getAutorID() == null) {
-//            throw new IllegalArgumentException("El ID del autor no puede ser null");
-//        }
-//
-//        LibroEntity libro = libroRepository.findById(id)
-//                .orElseThrow(() -> new EntityNotFoundException("Libro no encontrado con ID: " + id));
-//
-//        AutorEntity autor = autorRepository.findById(dto.getAutorID())
-//                .orElseThrow(() -> new EntityNotFoundException("Autor no encontrado con ID: " + dto.getAutorID()));
-//
-//        libro.setTitulo(dto.getTitulo());
-//        libro.setAutor(autor);
-//        libro.setPublicacion(Date.valueOf(dto.getPublicacion()));
-//        libro.setGenero(dto.getGenero());
-//        libro.setDisponible(dto.getDisponible());
-//
-//        return libroRepository.save(libro);
-//    }
-
-
-
 
 }

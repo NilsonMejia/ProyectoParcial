@@ -27,5 +27,4 @@ public interface UsuarioRepository extends JpaRepository<UsuarioEntity, Long> {
     List<UsuarioDTO> obtenerUsuariosInactivos(boolean estado);
 
 
-    //Optional<Object> findByNombre(String nombreUsuario);
 }
