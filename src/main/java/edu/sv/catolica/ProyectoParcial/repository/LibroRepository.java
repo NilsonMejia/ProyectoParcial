@@ -23,13 +23,5 @@ public interface LibroRepository extends JpaRepository<LibroEntity, Long> {
     void delete(@Param("LibroID") long LibroID);
 
 
-
-//    @Transactional
-//    @Modifying
-//    @Query("DELETE FROM LibroEntity l WHERE l.LibroID = :LibroID")
-//    void deleteByLibroID(@Param("LibroID")long LibroID);
-
-    //Optional<LibroEntity> findByTitulo(String Titulo);
-
 }
 

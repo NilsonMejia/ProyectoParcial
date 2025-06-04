@@ -50,14 +50,6 @@ public class MultaController {
                 HttpStatus.OK);
 
     }
-/*
-    @Transactional(readOnly = true)
-    @GetMapping("/ConsultaMonto/{cantidad}")
-    public List<MultaDTO> findMultasMenoresA(@PathVariable("cantidad") int cantidad){
-        return multa.findMultasMenoresA(cantidad);
-    }
-
- */
 
     @Transactional(readOnly = true)
     @GetMapping("/ConsultaMonto/{cantidad}")

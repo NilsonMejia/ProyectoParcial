@@ -51,14 +51,6 @@ public class PrestamoController {
 
     }
 
-/*
-    @Transactional(readOnly = true)
-    @GetMapping("/ConsultaPrestamos/{fecha}")
-    public List<PrestamoDTO>obtenerPrestamosPorFecha(@PathVariable("fecha") LocalDate fecha){
-        return prestamo.obtenerPrestamosPorFecha(fecha);
-    }
-
- */
 @Transactional(readOnly = true)
 @GetMapping("/ConsultaPrestamos/{fecha}")
 public ResponseEntity<?>obtenerPrestamosPorFecha(@PathVariable("fecha") LocalDate fecha){
