@@ -18,6 +18,9 @@ public class BibliotecaDTO {
 
     private long BibliotecaID;
     private LibroEntity libro;
+    private Long AutorID;
+    private Long LibroID;
+    private Long PrestamoID;
     private PrestamoEntity prestamo;
     private LocalDate FechaPrestamo;
     private LocalDate FechaDevolucion;

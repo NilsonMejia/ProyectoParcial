@@ -1,6 +1,7 @@
 package edu.sv.catolica.ProyectoParcial.controller;
 
 import edu.sv.catolica.ProyectoParcial.dto.PrestamoDTO;
+import edu.sv.catolica.ProyectoParcial.dto.PrestamoDTO2;
 import edu.sv.catolica.ProyectoParcial.dto.UsuarioDTO;
 import edu.sv.catolica.ProyectoParcial.entities.AutorEntity;
 import edu.sv.catolica.ProyectoParcial.entities.PrestamoEntity;
@@ -70,15 +71,15 @@ public ResponseEntity<?>obtenerPrestamosPorFecha(@PathVariable("fecha") LocalDat
 
 
 
-//    @PutMapping("/ActualizarPrestamo/{id}")
-//    public ResponseEntity<?> actualizarPrestamo(@PathVariable Long id, @RequestBody PrestamoDTO dto) {
-//        try {
-//            PrestamoEntity actualizado = prestamoImpl.actualizarPrestamo(id, dto);
-//            return ResponseEntity.ok(actualizado);
-//        } catch (EntityNotFoundException e) {
-//            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
-//        }
-//    }
+    @PutMapping("/ActualizarPrestamo/{id}")
+    public ResponseEntity<?> actualizarPrestamo(@PathVariable Long id, @RequestBody PrestamoDTO2 dto) {
+        try {
+            PrestamoEntity actualizado = prestamoImpl.actualizarPrestamo(id, dto);
+            return ResponseEntity.ok(actualizado);
+        } catch (EntityNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+    }
 
 
 

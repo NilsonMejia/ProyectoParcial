@@ -1,9 +1,13 @@
 package edu.sv.catolica.ProyectoParcial.controller;
 
+import edu.sv.catolica.ProyectoParcial.dto.AutorDTO;
+import edu.sv.catolica.ProyectoParcial.dto.BibliotecaDTO;
 import edu.sv.catolica.ProyectoParcial.entities.AutorEntity;
 import edu.sv.catolica.ProyectoParcial.entities.BibliotecaEntity;
 import edu.sv.catolica.ProyectoParcial.payload.MessageResponse;
 import edu.sv.catolica.ProyectoParcial.service.IBiblioteca;
+import edu.sv.catolica.ProyectoParcial.service.impl.BibliotecaImpl;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +22,8 @@ import java.util.List;
 public class BibliotecaController {
     @Autowired
     private IBiblioteca biblioteca;
+    @Autowired
+    private BibliotecaImpl bibliotecaImpl;
 
     @Transactional(readOnly = true)
     @GetMapping("/GetBiblioteca")
@@ -50,6 +56,18 @@ public class BibliotecaController {
                 .data(biblioteca.findFechaDevolucion(fechaDevolucion))
                 .build(),
                 HttpStatus.OK);
+    }
+
+    @PutMapping("/ActualizarBiblioteca/{id}")
+    public ResponseEntity<?> actualizarBiblioteca(
+            @PathVariable Long id,
+            @RequestBody BibliotecaDTO dto) {
+        try {
+            BibliotecaEntity actualizado = bibliotecaImpl.actualizarBiblioteca(id, dto);
+            return ResponseEntity.ok(actualizado);
+        } catch (EntityNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
     }
 
 

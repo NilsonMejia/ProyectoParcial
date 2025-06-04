@@ -1,8 +1,12 @@
 package edu.sv.catolica.ProyectoParcial.controller;
+import edu.sv.catolica.ProyectoParcial.dto.PrestamoDTO2;
 import edu.sv.catolica.ProyectoParcial.entities.AutorEntity;
 import edu.sv.catolica.ProyectoParcial.entities.MultaEntity;
+import edu.sv.catolica.ProyectoParcial.entities.PrestamoEntity;
 import edu.sv.catolica.ProyectoParcial.payload.MessageResponse;
 import edu.sv.catolica.ProyectoParcial.service.IMulta;
+import edu.sv.catolica.ProyectoParcial.service.impl.MultaImpl;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +25,9 @@ import java.util.List;
 public class MultaController {
     @Autowired
     private IMulta multa;
+    @Autowired
+    private MultaImpl multaImpl;
+
 
     @Transactional(readOnly = true)
     @GetMapping("/GetMulta")
@@ -60,6 +67,16 @@ public class MultaController {
                 .data(multa.findMultasMenoresA(cantidad)).
                 build(),
                 HttpStatus.OK);
+    }
+
+    @PutMapping("/ActualizarMulta/{id}")
+    public ResponseEntity<?> actualizaMulta(@PathVariable Long id, @RequestBody MultaDTO dto) {
+        try {
+            MultaEntity actualizado = multaImpl.actualizarMulta(id, dto);
+            return ResponseEntity.ok(actualizado);
+        } catch (EntityNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
     }
 
 

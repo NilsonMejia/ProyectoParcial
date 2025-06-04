@@ -14,7 +14,7 @@ import java.time.LocalDate;
 public class PrestamoDTO {
 
         private Long prestamoID;
-        private String tituloLibro;
+        private String Titulo;
         private String nombreUsuario;
         private LocalDate fechaPrestamo;
 

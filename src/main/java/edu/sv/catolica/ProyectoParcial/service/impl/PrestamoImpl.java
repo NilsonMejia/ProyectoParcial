@@ -1,6 +1,9 @@
 package edu.sv.catolica.ProyectoParcial.service.impl;
+import edu.sv.catolica.ProyectoParcial.dto.LibroDTO;
 import edu.sv.catolica.ProyectoParcial.dto.PrestamoDTO;
+import edu.sv.catolica.ProyectoParcial.dto.PrestamoDTO2;
 import edu.sv.catolica.ProyectoParcial.dto.UsuarioDTO;
+import edu.sv.catolica.ProyectoParcial.entities.AutorEntity;
 import edu.sv.catolica.ProyectoParcial.entities.LibroEntity;
 import edu.sv.catolica.ProyectoParcial.entities.PrestamoEntity;
 import edu.sv.catolica.ProyectoParcial.entities.UsuarioEntity;
@@ -15,6 +18,7 @@ import edu.sv.catolica.ProyectoParcial.service.IPrestamo;
 import edu.sv.catolica.ProyectoParcial.repository.PrestamoRepository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -47,6 +51,40 @@ public class PrestamoImpl implements IPrestamo {
     public List<PrestamoDTO>obtenerPrestamosPorFecha(LocalDate fecha ) {
         return prestamoRepository.obtenerPrestamosPorFecha(fecha);
     }
+    @Transactional
+    public PrestamoEntity actualizarPrestamo(Long id, PrestamoDTO2 dto) {
+        PrestamoEntity prestamo = prestamoRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Prestamo no encontrado con ID: " + id));
+        prestamo.setPrestamoID(dto.getPrestamoID());
+        prestamo.setFechaPrestamo(dto.getFechaPrestamo());
+        prestamo.setFechaDevolucion(dto.getFechaDevolucion());
+        prestamo.setLibroID((LibroEntity)
+                libroRepository.findById(dto.getLibroID())
+                        .orElseThrow(() -> new EntityNotFoundException("Libro no encontrado con ID: " + dto.getLibroID())));
+        prestamo.setDisponible(dto.getDisponible());
+        return prestamoRepository.save(prestamo);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 //    @Transactional
@@ -68,6 +106,21 @@ public class PrestamoImpl implements IPrestamo {
 //
 //        return prestamoRepository.save(prestamo);
 //    }
+//@Transactional
+//public PrestamoEntity actualizarPrestamo(Long id, PrestamoDTO dto) {
+//    PrestamoEntity prestamo = prestamoRepository.findById(id)
+//            .orElseThrow(() -> new EntityNotFoundException("Prestamo no encontrado con ID: " + id));
+//    prestamo.setPrestamoID(dto.getPrestamoID());
+//    prestamo.setFechaPrestamo(dto.getFechaPrestamo());
+//    libro.setTitulo(dto.getTitulo());
+//    libro.setAutor( (AutorEntity)
+//            autorRepository.findById(dto.getAutorID())
+//                    .orElseThrow(() -> new EntityNotFoundException("Autor no encontrado con ID: " + dto.getAutorID())));
+//    libro.setPublicacion(Date.valueOf(dto.getPublicacion()));
+//    libro.setGenero(dto.getGenero());
+//    libro.setDisponible(dto.getDisponible());
+//    return libroRepository.save(libro);
+//}
 
 //    @Transactional
 //    public PrestamoEntity actualizarPrestamo(Long id, PrestamoDTO dto) {
