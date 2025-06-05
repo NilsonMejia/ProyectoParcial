@@ -29,20 +29,40 @@ public class LibroController {
     @Transactional(readOnly = true)
     @GetMapping("/GetLibro")
     public ResponseEntity<?> getAutores() {
-        return new ResponseEntity<>(MessageResponse.builder()
-                .message("Proceso realizado con exito")
-                .data(libro.findAll())
-                .build(),
-                HttpStatus.OK);
+        try {
+            return new ResponseEntity<>(MessageResponse.builder()
+                    .message("Proceso realizado con exito")
+                    .data(libro.findAll())
+                    .build(),
+                    HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(
+                    MessageResponse.builder()
+                            .message("Error al obtener los libros")
+                            .data(e.getMessage())
+                            .build(),
+                    HttpStatus.INTERNAL_SERVER_ERROR
+            );
+        }
     }
     @Transactional
     @PostMapping("/PostLibro")
     public ResponseEntity<?> saveLibros(@RequestBody LibroEntity nuevolibro) {
-        return new ResponseEntity<>(MessageResponse.builder()
-                .message("Proceso realizado con exito")
-                .data(libro.save(nuevolibro))
-                .build(),
-                 HttpStatus.OK);
+        try {
+            return new ResponseEntity<>(MessageResponse.builder()
+                    .message("Proceso realizado con exito")
+                    .data(libro.save(nuevolibro))
+                    .build(),
+                     HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(
+                    MessageResponse.builder()
+                            .message("Error al enviar los datos")
+                            .data(e.getMessage())
+                            .build(),
+                    HttpStatus.INTERNAL_SERVER_ERROR
+            );
+        }
 
     }
     @Transactional(readOnly = true)

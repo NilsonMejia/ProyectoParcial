@@ -33,21 +33,41 @@ public class PrestamoController {
     @Transactional(readOnly = true)
     @GetMapping("/GetPrestamo")
     public ResponseEntity<?> getAutores() {
-        return new ResponseEntity<>(MessageResponse.builder()
-                .message("Proceso realizado con exito")
-                .data(prestamo.findAll())
-                .build(),
-                HttpStatus.OK);
+        try {
+            return new ResponseEntity<>(MessageResponse.builder()
+                    .message("Proceso realizado con exito")
+                    .data(prestamo.findAll())
+                    .build(),
+                    HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(
+                    MessageResponse.builder()
+                            .message("Error al obtener los prestamos")
+                            .data(e.getMessage())
+                            .build(),
+                    HttpStatus.INTERNAL_SERVER_ERROR
+            );
+        }
     }
 
     @Transactional
     @PostMapping("/PostPrestamo")
     public ResponseEntity<?> savePrestamos(@RequestBody PrestamoEntity nuevoprestamo) {
-        return new ResponseEntity<>(MessageResponse.builder()
-                .message("Proceso realizado con exito")
-                .data(prestamo.save(nuevoprestamo))
-                .build(),
-                HttpStatus.OK);
+        try {
+            return new ResponseEntity<>(MessageResponse.builder()
+                    .message("Proceso realizado con exito")
+                    .data(prestamo.save(nuevoprestamo))
+                    .build(),
+                    HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(
+                    MessageResponse.builder()
+                            .message("Error al enviar los datos")
+                            .data(e.getMessage())
+                            .build(),
+                    HttpStatus.INTERNAL_SERVER_ERROR
+            );
+        }
 
     }
 

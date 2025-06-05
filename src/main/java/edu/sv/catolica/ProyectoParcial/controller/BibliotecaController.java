@@ -28,21 +28,41 @@ public class BibliotecaController {
     @Transactional(readOnly = true)
     @GetMapping("/GetBiblioteca")
     public ResponseEntity<?> getAutores() {
-        return new ResponseEntity<>(MessageResponse.builder()
-                .message("Proceso realizado con exito")
-                .data(biblioteca.findAll())
-                .build(),
-                HttpStatus.OK);
+        try {
+            return new ResponseEntity<>(MessageResponse.builder()
+                    .message("Proceso realizado con exito")
+                    .data(biblioteca.findAll())
+                    .build(),
+                    HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(
+                    MessageResponse.builder()
+                            .message("Error al obtener los autores")
+                            .data(e.getMessage())
+                            .build(),
+                    HttpStatus.INTERNAL_SERVER_ERROR
+            );
+        }
     }
 
     @Transactional
     @PostMapping("/PostBiblioteca")
     public ResponseEntity<?> saveBiblioteca(@RequestBody BibliotecaEntity nuevaBiblioteca) {
-        return new ResponseEntity<>(MessageResponse.builder()
-                .message("Proceso realizado con exito")
-                .data(biblioteca.save(nuevaBiblioteca))
-                .build(),
-                HttpStatus.OK);
+        try {
+            return new ResponseEntity<>(MessageResponse.builder()
+                    .message("Proceso realizado con exito")
+                    .data(biblioteca.save(nuevaBiblioteca))
+                    .build(),
+                    HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(
+                    MessageResponse.builder()
+                            .message("Error al obtener los datos")
+                            .data(e.getMessage())
+                            .build(),
+                    HttpStatus.INTERNAL_SERVER_ERROR
+            );
+        }
 
     }
 
@@ -51,12 +71,22 @@ public class BibliotecaController {
     @GetMapping("/ConsultaFecha/{Fecha}")
     public ResponseEntity<?> findFechaDevolucion(@PathVariable("Fecha") LocalDate fechaDevolucion)
         {
-        return new ResponseEntity<>(MessageResponse.builder()
-                .message("Fecha de devolucion")
-                .data(biblioteca.findFechaDevolucion(fechaDevolucion))
-                .build(),
-                HttpStatus.OK);
-    }
+            try {
+                return new ResponseEntity<>(MessageResponse.builder()
+                        .message("Fecha de devolucion")
+                        .data(biblioteca.findFechaDevolucion(fechaDevolucion))
+                        .build(),
+                        HttpStatus.OK);
+            } catch (Exception e) {
+                return new ResponseEntity<>(
+                        MessageResponse.builder()
+                                .message("Error al obtener los datos")
+                                .data(e.getMessage())
+                                .build(),
+                        HttpStatus.INTERNAL_SERVER_ERROR
+                );
+            }
+        }
 
     @PutMapping("/ActualizarBiblioteca/{id}")
     public ResponseEntity<?> actualizarBiblioteca(

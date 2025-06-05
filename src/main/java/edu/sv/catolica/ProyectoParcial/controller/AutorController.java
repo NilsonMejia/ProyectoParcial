@@ -59,7 +59,7 @@ public class AutorController {
         } catch (Exception e) {
             return new ResponseEntity<>(
                     MessageResponse.builder()
-                            .message("Error al obtener los autores")
+                            .message("Error al insertar el autor")
                             .data(e.getMessage())
                             .build(),
                     HttpStatus.INTERNAL_SERVER_ERROR

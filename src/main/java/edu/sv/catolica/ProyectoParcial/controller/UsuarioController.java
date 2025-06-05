@@ -28,21 +28,41 @@ public class UsuarioController {
     @Transactional(readOnly = true)
     @GetMapping("/GetUsuario")
     public ResponseEntity<?> getAutores() {
-        return new ResponseEntity<>(MessageResponse.builder()
-                .message("Proceso realizado con exito")
-                .data(usuario.findAll())
-                .build(),
-                HttpStatus.OK);
+        try {
+            return new ResponseEntity<>(MessageResponse.builder()
+                    .message("Proceso realizado con exito")
+                    .data(usuario.findAll())
+                    .build(),
+                    HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(
+                    MessageResponse.builder()
+                            .message("Error al obtener los usuarios")
+                            .data(e.getMessage())
+                            .build(),
+                    HttpStatus.INTERNAL_SERVER_ERROR
+            );
+        }
     }
 
     @Transactional
     @PostMapping("/PostUsuario")
     public ResponseEntity<?> saveUsuarios(@RequestBody UsuarioEntity nuevousuario) {
-        return new ResponseEntity<>(MessageResponse.builder()
-                .message("Proceso realizado con exito ")
-                .data(usuario.save(nuevousuario))
-                .build(),
-                HttpStatus.OK);
+        try {
+            return new ResponseEntity<>(MessageResponse.builder()
+                    .message("Proceso realizado con exito ")
+                    .data(usuario.save(nuevousuario))
+                    .build(),
+                    HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(
+                    MessageResponse.builder()
+                            .message("Error al enviar los datos")
+                            .data(e.getMessage())
+                            .build(),
+                    HttpStatus.INTERNAL_SERVER_ERROR
+            );
+        }
 
     }
 
