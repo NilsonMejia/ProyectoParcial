@@ -14,6 +14,5 @@ public interface IPrestamo {
     List<PrestamoDTO> obtenerPrestamosPorFecha(LocalDate fecha);
 
 
-
-           
+    void delete(Long id);
 }

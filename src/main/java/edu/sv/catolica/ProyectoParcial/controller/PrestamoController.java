@@ -71,17 +71,15 @@ public class PrestamoController {
 
     }
 
-@Transactional(readOnly = true)
-@GetMapping("/ConsultaPrestamos/{fecha}")
-public ResponseEntity<?>obtenerPrestamosPorFecha(@PathVariable("fecha") LocalDate fecha){
-    return new ResponseEntity<>(MessageResponse.builder()
-            .message("Proceso realizado con exito")
-            .data(prestamo.obtenerPrestamosPorFecha(fecha))
-            .build(),
-            HttpStatus.OK);
-}
-
-
+    @Transactional(readOnly = true)
+    @GetMapping("/ConsultaPrestamos/{fecha}")
+    public ResponseEntity<?> obtenerPrestamosPorFecha(@PathVariable("fecha") LocalDate fecha) {
+        return new ResponseEntity<>(MessageResponse.builder()
+                .message("Proceso realizado con exito")
+                .data(prestamo.obtenerPrestamosPorFecha(fecha))
+                .build(),
+                HttpStatus.OK);
+    }
 
     @PutMapping("/ActualizarPrestamo/{id}")
     public ResponseEntity<?> actualizarPrestamo(@PathVariable Long id, @RequestBody PrestamoDTO2 dto) {
@@ -91,6 +89,15 @@ public ResponseEntity<?>obtenerPrestamosPorFecha(@PathVariable("fecha") LocalDat
         } catch (EntityNotFoundException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
+    }
+    @Transactional
+    @DeleteMapping("/EliminarPrestamo/{id}")
+    public ResponseEntity<?> eliminarPrestamo(@PathVariable Long id) {
+        prestamo.delete(id);
+        return new ResponseEntity<>(MessageResponse.builder()
+                .message("Presramo eliminado con éxito.")
+                .data("El prestamo con id: " + id + " ha sido eliminada")
+                .build(), HttpStatus.OK);
     }
 
 

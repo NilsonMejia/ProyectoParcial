@@ -1,24 +1,17 @@
 package edu.sv.catolica.ProyectoParcial.service.impl;
-import edu.sv.catolica.ProyectoParcial.dto.LibroDTO;
 import edu.sv.catolica.ProyectoParcial.dto.PrestamoDTO;
 import edu.sv.catolica.ProyectoParcial.dto.PrestamoDTO2;
-import edu.sv.catolica.ProyectoParcial.dto.UsuarioDTO;
-import edu.sv.catolica.ProyectoParcial.entities.AutorEntity;
 import edu.sv.catolica.ProyectoParcial.entities.LibroEntity;
 import edu.sv.catolica.ProyectoParcial.entities.PrestamoEntity;
-import edu.sv.catolica.ProyectoParcial.entities.UsuarioEntity;
 import edu.sv.catolica.ProyectoParcial.repository.LibroRepository;
 import edu.sv.catolica.ProyectoParcial.repository.UsuarioRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import edu.sv.catolica.ProyectoParcial.service.IPrestamo;
 import edu.sv.catolica.ProyectoParcial.repository.PrestamoRepository;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -63,6 +56,14 @@ public class PrestamoImpl implements IPrestamo {
                         .orElseThrow(() -> new EntityNotFoundException("Libro no encontrado con ID: " + dto.getLibroID())));
         prestamo.setDisponible(dto.getDisponible());
         return prestamoRepository.save(prestamo);
+    }
+
+    @Override
+    public void delete(Long id) {
+        if (!prestamoRepository.existsById(id)) {
+            throw new RuntimeException("Prestamo no encontrado con id: " + id);
+        }
+        prestamoRepository.deleteById(id);
     }
 
 }
