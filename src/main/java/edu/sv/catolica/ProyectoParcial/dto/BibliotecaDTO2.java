@@ -13,7 +13,6 @@ public class BibliotecaDTO2 {
 
         private String Titulo;
         private LocalDate FechaDevolucion;
-        private String Nombre;
 
 
     public BibliotecaDTO2(String titulo, LocalDate fechaDevolucion) {

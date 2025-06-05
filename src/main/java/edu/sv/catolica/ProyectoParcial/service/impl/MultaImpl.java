@@ -2,6 +2,7 @@ package edu.sv.catolica.ProyectoParcial.service.impl;
 
 import edu.sv.catolica.ProyectoParcial.dto.LibroDTO;
 import edu.sv.catolica.ProyectoParcial.dto.MultaDTO;
+import edu.sv.catolica.ProyectoParcial.dto.MultaDTO2;
 import edu.sv.catolica.ProyectoParcial.entities.AutorEntity;
 import edu.sv.catolica.ProyectoParcial.entities.MultaEntity;
 import edu.sv.catolica.ProyectoParcial.repository.MultaRepository;
@@ -45,7 +46,7 @@ public class MultaImpl implements IMulta {
     }
 
     @Transactional
-    public MultaEntity actualizarMulta(Long id, MultaDTO dto) {
+    public MultaEntity actualizarMulta(Long id, MultaDTO2 dto) {
         MultaEntity multa = multaRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Multa no encontrada con ID: " + id));
         multa.setEstado(dto.getEstado());

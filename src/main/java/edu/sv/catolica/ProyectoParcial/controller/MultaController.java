@@ -1,4 +1,5 @@
 package edu.sv.catolica.ProyectoParcial.controller;
+import edu.sv.catolica.ProyectoParcial.dto.MultaDTO2;
 import edu.sv.catolica.ProyectoParcial.dto.PrestamoDTO2;
 import edu.sv.catolica.ProyectoParcial.entities.AutorEntity;
 import edu.sv.catolica.ProyectoParcial.entities.MultaEntity;
@@ -62,7 +63,7 @@ public class MultaController {
     }
 
     @PutMapping("/ActualizarMulta/{id}")
-    public ResponseEntity<?> actualizaMulta(@PathVariable Long id, @RequestBody MultaDTO dto) {
+    public ResponseEntity<?> actualizaMulta(@PathVariable Long id, @RequestBody MultaDTO2 dto) {
         try {
             MultaEntity actualizado = multaImpl.actualizarMulta(id, dto);
             return ResponseEntity.ok(actualizado);
