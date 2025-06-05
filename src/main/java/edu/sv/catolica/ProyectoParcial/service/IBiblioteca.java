@@ -12,4 +12,5 @@ public interface IBiblioteca {
     List<BibliotecaDTO2> findFechaDevolucion(LocalDate fechaDevolucion);
 
 
+    void delete(Long id);
 }

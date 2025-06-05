@@ -59,4 +59,12 @@ public class BibliotecaImpl implements IBiblioteca {
         biblioteca.setFechaDevolucion(dto.getFechaDevolucion());
         return bibliotecaRepository.save(biblioteca);
     }
+
+    @Override
+    public void delete(Long id) {
+        if (!bibliotecaRepository.existsById(id)) {
+            throw new RuntimeException("Biblioteca no encontrado con id: " + id);
+        }
+        bibliotecaRepository.deleteById(id);
+    }
 }

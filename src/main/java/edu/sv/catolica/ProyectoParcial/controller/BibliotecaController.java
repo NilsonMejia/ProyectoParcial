@@ -99,6 +99,15 @@ public class BibliotecaController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
     }
+    @Transactional
+    @DeleteMapping("/EliminarBiblioteca/{id}")
+    public ResponseEntity<?> eliminarBiblioteca(@PathVariable Long id) {
+        biblioteca.delete(id);
+        return new ResponseEntity<>(MessageResponse.builder()
+                .message("Biblioteca eliminada con éxito.")
+                .data("La biblioteca con id: " + id + " ha sido eliminada")
+                .build(), HttpStatus.OK);
+    }
 
 
 
