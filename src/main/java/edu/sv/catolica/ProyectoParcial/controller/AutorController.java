@@ -15,6 +15,8 @@ import edu.sv.catolica.ProyectoParcial.entities.AutorEntity;
 import edu.sv.catolica.ProyectoParcial.service.IAutor;
 import org.springframework.http.MediaType;
 import java.util.List;
+import jakarta.validation.Valid;
+import org.springframework.validation.BindingResult;
 
 @RestController
 @RequestMapping("/Autor")
@@ -49,24 +51,40 @@ public class AutorController {
 
     @Transactional
     @PostMapping("/PostAutor")
-    public ResponseEntity<?> saveAutores(@RequestBody AutorEntity nuevoautor) {
+    public ResponseEntity<?> saveAutores(@Valid @RequestBody AutorEntity nuevoautor, BindingResult result) {
         try {
-            return new ResponseEntity<>(MessageResponse.builder()
-                    .message("Proceso realizado con exito")
-                    .data(autor.save(nuevoautor))
-                    .build(),
-                    HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(
-                    MessageResponse.builder()
-                            .message("Error al insertar el autor")
-                            .data(e.getMessage())
-                            .build(),
-                    HttpStatus.INTERNAL_SERVER_ERROR
-            );
-        }
+            if (result.hasErrors()) {
+                List<String> errores = result.getFieldErrors()
+                        .stream()
+                        .sorted((a, b) -> {
+                            List<String> orden = List.of("Nombre", "Apellido");
+                            return Integer.compare(orden.indexOf(a.getField()), orden.indexOf(b.getField()));
+                        })
+                        .map(error -> error.getField() + ": " + error.getDefaultMessage())
+                        .toList();
 
+                return new ResponseEntity<>(
+                        MessageResponse.builder()
+                                .message("Error al insertar el autor")
+                                .data(errores)
+                                .build(),
+                        HttpStatus.BAD_REQUEST
+                );
+            }
+
+            return new ResponseEntity<>(MessageResponse.builder()
+                    .message("Proceso realizado con éxito")
+                    .data(autor.save(nuevoautor))
+                    .build(), HttpStatus.CREATED);
+        } catch (Exception e) {
+            return new ResponseEntity<>(MessageResponse.builder()
+                    .message("Error al insertar el autor")
+                    .data(e.getMessage())
+                    .build(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
+
+
 
     @Transactional(readOnly = true)
     @GetMapping(value = "/AutorPorId/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
