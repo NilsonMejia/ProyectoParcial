@@ -57,4 +57,14 @@ public class MultaImpl implements IMulta {
                         .orElseThrow(() -> new EntityNotFoundException("Usuario no encontrado con ID: " + dto.getUsuarioID())));
         return multaRepository.save(multa);
     }
+
+
+    @Override
+    public void delete(Long id) {
+        if (!multaRepository.existsById(id)) {
+            throw new RuntimeException("Multa no encontrada con id: " + id);
+        }
+        multaRepository.deleteById(id);
+    }
+
 }

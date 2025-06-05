@@ -33,22 +33,42 @@ public class MultaController {
     @Transactional(readOnly = true)
     @GetMapping("/GetMulta")
     public ResponseEntity<?> getAutores() {
-        return new ResponseEntity<>(MessageResponse.builder()
-                .message("Proceso realizado con exito")
-                .data(multa.findAll())
-                .build(),
-                HttpStatus.OK);
+        try {
+            return new ResponseEntity<>(MessageResponse.builder()
+                    .message("Proceso realizado con exito")
+                    .data(multa.findAll())
+                    .build(),
+                    HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(
+                    MessageResponse.builder()
+                            .message("Error al obtener los prestamos")
+                            .data(e.getMessage())
+                            .build(),
+                    HttpStatus.INTERNAL_SERVER_ERROR
+            );
+        }
     }
 
 
     @Transactional
     @PostMapping("/PostMulta")
     public ResponseEntity<?> saveMultas(@RequestBody MultaEntity nuevaMulta) {
-        return new ResponseEntity<>(MessageResponse.builder()
-                .message("Proceso realizado con exito")
-                .data(multa.save(nuevaMulta))
-                .build(),
-                HttpStatus.OK);
+        try {
+            return new ResponseEntity<>(MessageResponse.builder()
+                    .message("Proceso realizado con exito")
+                    .data(multa.save(nuevaMulta))
+                    .build(),
+                    HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(
+                    MessageResponse.builder()
+                            .message("Error al obtener los prestamos")
+                            .data(e.getMessage())
+                            .build(),
+                    HttpStatus.INTERNAL_SERVER_ERROR
+            );
+        }
 
     }
 
@@ -70,6 +90,16 @@ public class MultaController {
         } catch (EntityNotFoundException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
+    }
+
+    @Transactional
+    @DeleteMapping("/EliminarMulta/{id}")
+    public ResponseEntity<?> eliminarMulta(@PathVariable Long id) {
+        multa.delete(id);
+        return new ResponseEntity<>(MessageResponse.builder()
+                .message("Multa eliminada con éxito.")
+                .data("La multa con id: " + id + " ha sido eliminada")
+                .build(), HttpStatus.OK);
     }
 
 

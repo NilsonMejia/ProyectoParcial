@@ -12,4 +12,7 @@ public interface IMulta {
     MultaEntity save(MultaEntity multa);
 
     List<MultaDTO> findMultasMenoresA(int cantidad);
+
+    void delete(Long id);
+
 }
