@@ -1,6 +1,7 @@
 package edu.sv.catolica.ProyectoParcial.repository;
 
 import edu.sv.catolica.ProyectoParcial.dto.BibliotecaDTO;
+import edu.sv.catolica.ProyectoParcial.dto.BibliotecaDTO2;
 import edu.sv.catolica.ProyectoParcial.entities.BibliotecaEntity;
 import edu.sv.catolica.ProyectoParcial.entities.LibroEntity;
 import edu.sv.catolica.ProyectoParcial.entities.PrestamoEntity;
@@ -20,10 +21,11 @@ public interface BibliotecaRepository extends JpaRepository<BibliotecaEntity, Lo
 
 
 
-    @Query("SELECT new edu.sv.catolica.ProyectoParcial.dto.BibliotecaDTO(b.libro,b.FechaDevolucion) " +
+    @Query("SELECT new edu.sv.catolica.ProyectoParcial.dto.BibliotecaDTO2(" +
+            "b.libro.Titulo, b.FechaDevolucion) " +
             "FROM BibliotecaEntity b " +
             "WHERE b.FechaDevolucion = :fechaDevolucion")
-    List<BibliotecaDTO> findFechaDevolucion(@Param("fechaDevolucion") LocalDate fechaDevolucion);
+    List<BibliotecaDTO2> findFechaDevolucion(@Param("fechaDevolucion") LocalDate fechaDevolucion);
 
     @Transactional
     @Modifying

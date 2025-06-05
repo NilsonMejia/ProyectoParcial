@@ -30,6 +30,8 @@ public class BibliotecaEntity {
     @JoinColumn(name = "Libro_ID" , nullable = false)
     private LibroEntity libro;
 
+
+
     @ManyToOne
     @JsonIgnore
     @JoinColumn(name = "Prestamo_ID" , nullable = false)

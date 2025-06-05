@@ -18,6 +18,7 @@ public class BibliotecaDTO {
 
     private long BibliotecaID;
     private LibroEntity libro;
+    private String Titulo;
     private Long AutorID;
     private Long LibroID;
     private Long PrestamoID;
@@ -26,24 +27,4 @@ public class BibliotecaDTO {
     private LocalDate FechaDevolucion;
     private Boolean Disponible;
 
-    public BibliotecaDTO(LibroEntity libro, LocalDate fechaDevolucion) {
-        this.libro = libro;
-        this.FechaDevolucion = fechaDevolucion;
-    }
-
-    public LibroEntity getLibro() {
-        return libro;
-    }
-
-    public void setLibro(LibroEntity libro) {
-        this.libro = libro;
-    }
-
-    public LocalDate getFechaDevolucion() {
-        return FechaDevolucion;
-    }
-
-    public void setFechaDevolucion(LocalDate fechaDevolucion) {
-        FechaDevolucion = fechaDevolucion;
-    }
 }

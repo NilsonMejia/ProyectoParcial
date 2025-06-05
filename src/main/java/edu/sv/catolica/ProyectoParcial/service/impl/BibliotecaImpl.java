@@ -1,7 +1,7 @@
 package edu.sv.catolica.ProyectoParcial.service.impl;
 
 import edu.sv.catolica.ProyectoParcial.dto.BibliotecaDTO;
-import edu.sv.catolica.ProyectoParcial.dto.PrestamoDTO2;
+import edu.sv.catolica.ProyectoParcial.dto.BibliotecaDTO2;
 import edu.sv.catolica.ProyectoParcial.entities.BibliotecaEntity;
 import edu.sv.catolica.ProyectoParcial.entities.LibroEntity;
 import edu.sv.catolica.ProyectoParcial.entities.PrestamoEntity;
@@ -40,7 +40,7 @@ public class BibliotecaImpl implements IBiblioteca {
     }
 
     @Override
-    public List<BibliotecaDTO> findFechaDevolucion(LocalDate fechaDevolucion) {
+    public List<BibliotecaDTO2> findFechaDevolucion(LocalDate fechaDevolucion) {
         return bibliotecaRepository.findFechaDevolucion(fechaDevolucion);
     }
 
