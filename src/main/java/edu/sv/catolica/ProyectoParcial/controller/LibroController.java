@@ -49,22 +49,40 @@ public class LibroController {
     @PostMapping("/PostLibro")
     public ResponseEntity<?> saveLibros(@RequestBody LibroEntity nuevolibro) {
         try {
-            return new ResponseEntity<>(MessageResponse.builder()
-                    .message("Proceso realizado con exito")
-                    .data(libro.save(nuevolibro))
-                    .build(),
-                     HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(
-                    MessageResponse.builder()
-                            .message("Error al enviar los datos")
-                            .data(e.getMessage())
-                            .build(),
-                    HttpStatus.INTERNAL_SERVER_ERROR
-            );
-        }
+            // Validación manual de campos
+            if (nuevolibro.getTitulo() == null || nuevolibro.getTitulo().trim().isEmpty()) {
+                return ResponseEntity.badRequest().body(
+                        MessageResponse.builder()
+                                .message("El título del libro no puede estar vacío.")
+                                .data(null)
+                                .build()
+                );
+            }
 
+            if (nuevolibro.getPublicacion() == null) {
+                return ResponseEntity.badRequest().body(
+                        MessageResponse.builder()
+                                .message("La fecha de publicación no puede ser nula.")
+                                .data(null)
+                                .build()
+                );
+            }
+
+            LibroEntity guardado = libro.save(nuevolibro);
+            return new ResponseEntity<>(MessageResponse.builder()
+                    .message("Libro guardado correctamente.")
+                    .data(guardado)
+                    .build(), HttpStatus.CREATED);
+
+        } catch (Exception e) {
+            return new ResponseEntity<>(MessageResponse.builder()
+                    .message("Error al guardar el libro.")
+                    .data(e.getMessage())
+                    .build(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
+
+
     @Transactional(readOnly = true)
     @GetMapping("/BuscarLibro/{Titulo}")
     public ResponseEntity<?> buscarLibroPorTitulo(@PathVariable String Titulo) {
@@ -95,5 +113,7 @@ public class LibroController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
     }
+
+
 
 }
