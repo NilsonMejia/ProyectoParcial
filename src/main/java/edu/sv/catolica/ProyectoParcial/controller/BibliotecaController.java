@@ -4,6 +4,7 @@ import edu.sv.catolica.ProyectoParcial.dto.AutorDTO;
 import edu.sv.catolica.ProyectoParcial.dto.BibliotecaDTO;
 import edu.sv.catolica.ProyectoParcial.entities.AutorEntity;
 import edu.sv.catolica.ProyectoParcial.entities.BibliotecaEntity;
+import edu.sv.catolica.ProyectoParcial.payload.BibliotecaException;
 import edu.sv.catolica.ProyectoParcial.payload.MessageResponse;
 import edu.sv.catolica.ProyectoParcial.service.IBiblioteca;
 import edu.sv.catolica.ProyectoParcial.service.impl.BibliotecaImpl;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/Biblioteca")
@@ -37,7 +39,7 @@ public class BibliotecaController {
         } catch (Exception e) {
             return new ResponseEntity<>(
                     MessageResponse.builder()
-                            .message("Error al obtener los autores")
+                            .message("Error al obtener los datos")
                             .data(e.getMessage())
                             .build(),
                     HttpStatus.INTERNAL_SERVER_ERROR
@@ -49,19 +51,18 @@ public class BibliotecaController {
     @PostMapping("/PostBiblioteca")
     public ResponseEntity<?> saveBiblioteca(@RequestBody BibliotecaEntity nuevaBiblioteca) {
         try {
+            if (nuevaBiblioteca.getFechaPrestamo() == null) {
+                throw new BibliotecaException("La fecha de préstamo no puede ser nula");
+            }
             return new ResponseEntity<>(MessageResponse.builder()
                     .message("Proceso realizado con exito")
                     .data(biblioteca.save(nuevaBiblioteca))
                     .build(),
                     HttpStatus.OK);
+        } catch (BibliotecaException e) {
+            throw e; // Será capturado por el @ControllerAdvice
         } catch (Exception e) {
-            return new ResponseEntity<>(
-                    MessageResponse.builder()
-                            .message("Error al obtener los datos")
-                            .data(e.getMessage())
-                            .build(),
-                    HttpStatus.INTERNAL_SERVER_ERROR
-            );
+            throw new BibliotecaException("Error inesperado al guardar la biblioteca", e);
         }
 
     }
@@ -77,7 +78,8 @@ public class BibliotecaController {
                         .data(biblioteca.findFechaDevolucion(fechaDevolucion))
                         .build(),
                         HttpStatus.OK);
-            } catch (Exception e) {
+            }
+            catch (Exception e) {
                 return new ResponseEntity<>(
                         MessageResponse.builder()
                                 .message("Error al obtener los datos")
