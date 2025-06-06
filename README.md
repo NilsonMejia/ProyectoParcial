@@ -97,7 +97,7 @@ Esta guía describe cómo interactuar con los principales endpoints de la API pa
 #### 1. Obtener todos los libros
 
 ```bash
-curl -X GET http://localhost:8080/api/libros
+curl -X GET http://localhost:8080/Libro/Getlibro
 
 
 
